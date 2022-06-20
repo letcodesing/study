@@ -1,6 +1,7 @@
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
+
 #1. 데이터
 x = np.array([1,2,3,5,4])
 y = np.array([1,2,3,4,5])
@@ -19,7 +20,7 @@ model.add(Dense(1))
 
 #3. 컴파일, 훈련
 model.compile(loss='mae', optimizer='adam')
-model.fit(x, y, epochs=5000)
+model.fit(x, y, epochs=5000, batch_size=1)
 
 #4. 평가, 예측
 loss = model.evaluate(x, y)
