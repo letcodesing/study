@@ -18,6 +18,12 @@ print(x_train)
 print(x_test)
 print(y_train)
 print(y_test)
+
+# [1 2 3 4 5 6 7]
+# [ 8  9 10]
+# [1 2 3 4 5 6 7]
+# [ 8  9 10]
+
 # x_train = np.array([1,2,3,4,5,6,7])
 # x_test = np.array([8,9,10])
 # y_train = np.array([1,2,3,4,5,6,7])
@@ -43,4 +49,7 @@ print('loss ', loss)
 
 result = model.predict([11])
 print('11의 예측값', result)
+
+# loss  1.7894308257382363e-10
+# 11의 예측값 [[10.999979]]
 
