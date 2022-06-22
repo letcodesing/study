@@ -34,8 +34,8 @@ model.fit(x, y, epochs = 100, batch_size=1)
 #4. 평가, 예측
 loss = model.evaluate(x_test, y_test)
 print(loss)
-
-y_predict = model.predict(x) #정확하게 해석안됨 왜 x가 들어가는가
+print(x)
+y_predict = model.predict(x) #x를 넣었을때 y가 얼마나오느냐
 print(y_predict)
 
 from sklearn.metrics import r2_score
