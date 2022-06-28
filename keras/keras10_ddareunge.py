@@ -7,7 +7,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 import time
 
-path = './_data/ddareung/'
+
+pd.__version__
+path = './_data/ddareunge/'
 train_set = pd.read_csv(path + 'train.csv', index_col=0)
 test_set = pd.read_csv(path + 'test.csv', index_col=0)
 
@@ -49,7 +51,7 @@ model.add(Dense(1))
 
 #3. 컴파일 훈련
 model.compile(loss = 'mse', optimizer = 'adam')
-model.fit(x_train, y_train, epochs = 4500, batch_size=200, verbose=3)
+model.fit(x_train, y_train, epochs = 4500, batch_size=200, verbose=1)
 
 start_time = time.time()
 

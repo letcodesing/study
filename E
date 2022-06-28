@@ -1,0 +1,6 @@
+0x8007002c-0x4001c #윈도설치 안됨 백신프로그램이나 하드웨어 충돌이라고함 확인안됨
+
+설치안되거나 오류시 관리자권한인지 확인해봐야함
+ERROR: Could not install packages due to an OSError: [WinError 5] 
+
+텐서플로 동작안함 검색어 Traceback (most recent call last): tensorflow - 해결책 pip --default-timeout=3000 install tensorflow 
