@@ -7,7 +7,6 @@ train_set = pd.read_csv(path + 'train.csv')
 test_set = pd.read_csv(path + 'test.csv')
 submission = pd.read_csv(path + 'sample_submission.csv')
 
-display(train_set.head(), test_set.head())
 
 
 
@@ -160,7 +159,7 @@ model.add(Dense(1))
 
 #3.컴파일 훈련
 model.compile(loss = 'mse', optimizer = 'adam')
-model.fit(x_train, y_train, epochs = 2500, batch_size=20, verbose=1)
+model.fit(x_train, y_train, epochs = 220000, batch_size=20, verbose=1)
 
 
 #4.평가 예측
@@ -181,3 +180,8 @@ submission.to_csv(path + 'submission.csv', index=False)
 # 5/5 [==============================] - 0s 3ms/step
 # r2 0.8595986022948693
 # 46/46 [==============================] - 0s 731us/step
+
+# loss 661964096.0
+# 5/5 [==============================] - 0s 3ms/step
+# r2 0.8736365850993209
+# 46/46 [==============================] - 0s 537us/step
