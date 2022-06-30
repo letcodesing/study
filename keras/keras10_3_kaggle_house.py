@@ -156,12 +156,14 @@ model.add(Dense(200))
 model.add(Dense(200))
 model.add(Dense(200))
 model.add(Dense(1))
-
+import time
 #3.컴파일 훈련
 model.compile(loss = 'mse', optimizer = 'adam')
-model.fit(x_train, y_train, epochs = 220000, batch_size=20, verbose=1)
+start_time = time.time()
+model.fit(x_train, y_train, epochs = 2200, batch_size=200, verbose=1)
+end_time = time.time()
 
-
+print('시간', end_time - start_time)
 #4.평가 예측
 loss = model.evaluate(x_test, y_test)
 print('loss', loss)
@@ -174,6 +176,7 @@ print('r2', r2)
 #진짜 답안지
 y_summit = model.predict(test_set)
 submission['SalePrice'] = y_summit
+submission = submission.fillna(0)
 submission.to_csv(path + 'submission.csv', index=False)
 
 # loss 735502976.0

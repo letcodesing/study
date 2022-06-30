@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from sqlalchemy import null
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+from tensorflow.python.keras.layers import Dense
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OrdinalEncoder

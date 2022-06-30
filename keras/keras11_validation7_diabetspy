@@ -32,7 +32,7 @@ model.add(Dense(1))
 
 #3. 컴파일 훈련
 model.compile(loss = 'mse', optimizer='adam')
-model.fit(x_train, y_train, epochs=200, batch_size=100)
+model.fit(x_train, y_train, epochs=200, batch_size=100, validation_split=0.25)
 
 #4. 평가, 예측
 loss = model.evaluate(x_test, y_test)
@@ -43,4 +43,30 @@ y_predict = model.predict(x_test)
 from sklearn.metrics import r2_score
 r2=r2_score(y_test, y_predict)
 print('r2', r2)
+
+
+#vali 적용전
+# loss 3717.52490234375
+# 3/3 [==============================] - 0s 836us/step
+# r2 0.4271954209391574
+
+# loss 3948.56884765625
+# 3/3 [==============================] - 0s 999us/step
+# r2 0.39159565035296795
+
+# loss 3750.03271484375
+# 3/3 [==============================] - 0s 500us/step
+# r2 0.42218665427150825
+
+#적용후
+# loss 4267.72607421875
+# 3/3 [==============================] - 0s 499us/step
+# r2 0.3424191315644556
+
+# loss 4283.685546875
+# 3/3 [==============================] - 0s 997us/step
+# r2 0.3399601997549837
+
+
+
 
