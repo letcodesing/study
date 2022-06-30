@@ -1,6 +1,5 @@
 #1. 데이터 불러오기
-from sklearn.preprocessing import LabelEncoder
-LE = LabelEncoder()
+
 import pandas as pd
 path = './_data/kaggle_house/'
 train_set = pd.read_csv(path + 'train.csv')

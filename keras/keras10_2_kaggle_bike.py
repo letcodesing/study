@@ -14,12 +14,12 @@ print(test_set)
 
 
 
-'''
+
 train_set['datetime'] = pd.to_datetime(train_set['datetime'])
 train_set['datetime'].head()
 
 print(train_set.dtypes)
-
+'''
 train_set['Year']=train_set['datetime'].dt.year
 train_set['Month']=train_set['datetime'].dt.month
 train_set['Day']=train_set['datetime'].dt.day
@@ -172,3 +172,7 @@ submission.to_csv(path + 'sampleSubmission.csv')
 # rmse 192.86463559770135
 # 203/203 [==============================] - 0s 751us/step
 # (6493, 1)
+
+
+submission['SalePrice'] = y_predict
+submission.to_csv(path + 'submission.csv')
