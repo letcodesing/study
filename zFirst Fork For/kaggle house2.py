@@ -18,7 +18,7 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-%matplotlib inline
+# %matplotlib inline
 import matplotlib.pyplot as plt  # Matlab-style plotting
 import seaborn as sns
 color = sns.color_palette()
@@ -292,6 +292,6 @@ submit.head()
 # from pycaret.regression import *
 # import pycaret
 # setup_reg = setup(data=Dataset, target='SalePrice')
-pip list
+# pip list
 
-https://www.kaggle.com/code/laplace8/house-price-practice-220628
+# https://www.kaggle.com/code/laplace8/house-price-practice-220628
