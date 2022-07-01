@@ -32,15 +32,26 @@ model.add(Dense(1))
 
 #3. 컴파일 훈련
 model.compile(loss = 'mse', optimizer='adam')
-model.fit(x_train, y_train, epochs=200, batch_size=100)
+history = model.fit(x_train, y_train, epochs=200, batch_size=100, validation_split=0.1)
 
 #4. 평가, 예측
 loss = model.evaluate(x_test, y_test)
 print('loss', loss)
 
-y_predict = model.predict(x_test)
+print(history.history)
 
-from sklearn.metrics import r2_score
-r2=r2_score(y_test, y_predict)
-print('r2', r2)
+import matplotlib.pyplot as plt
+from matplotlib import font_manager, rc
+font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
+rc('font', family=font_name)
+plt.figure(figsize=(2,3))
+plt.grid()
+plt.plot(history.history['loss'], marker='_', c='red', label='loss')
+plt.plot(history.history['val_loss'], marker='.', c='green', label='val_loss')
+plt.title('나나미')
+plt.ylabel('epochs')
+plt.xlabel('loss')
+plt.legend()
+plt.show()
+
 

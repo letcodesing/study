@@ -42,13 +42,14 @@ loss = model.evaluate(x_test, y_test)
 print('loss', loss)
 
 import matplotlib.pyplot as plt
+
 from matplotlib import font_manager, rc
 font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
 rc('font', family=font_name)
 
 plt.figure(figsize=(10,8))
-plt.plot(hist.history['loss'], marker='.', c='red', label='loss')
-plt.plot(hist.history['val_loss'], marker='_',c='blue', label='val_loss')
+plt.plot(model.fit(x_train, y_train, epochs=250, batch_size=200, validation_split=0.1).history['loss'], marker='.', c='red', label='loss')
+plt.plot(model.fit(x_train, y_train, epochs=250, batch_size=200, validation_split=0.1).history['val_loss'], marker='_',c='blue', label='val_loss')
 plt.grid()
 plt.title('합쳐')
 plt.ylabel('loss')
