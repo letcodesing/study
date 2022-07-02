@@ -1,3 +1,4 @@
+from sklearn import metrics
 from sklearn.datasets import load_boston
 
 data_sets = load_boston()
@@ -26,13 +27,14 @@ from tensorflow.python.keras.layers import Dense
 print(x.shape)
 model = Sequential()
 model.add(Dense(5, input_dim=13))
-model.add(Dense(5))
-model.add(Dense(5))
+model.add(Dense(5, activation='sigmoid'))
+model.add(Dense(5, activation='relu'))
+model.add(Dense(5, activation='sigmoid'))
 model.add(Dense(5))
 model.add(Dense(1))
 
 #컴파일 훈련
-model.compile(loss = 'mse', optimizer = 'adam')
+model.compile(loss = 'mse', optimizer = 'adam', metrics=['accracy', 'mae'])
 #컴파일 전후 얼리스타핑 미니멈 혹은 맥시멈값을 patience 지켜보고 있다가 정지시키는 함수
 
 from tensorflow.python.keras.callbacks import EarlyStopping
