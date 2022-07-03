@@ -40,21 +40,33 @@ model.add(Dense(1, activation='sigmoid'))
 model.compile(loss = 'binary_crossentropy', optimizer='adam', metrics=['accuracy', 
                                                                        'mse'] )
 from tensorflow.python.keras.callbacks import EarlyStopping
-ES = EarlyStopping(monitor='val_loss', patience=900, mode='min', verbose=1, restore_best_weights=True)
-g = model.fit(x_train, y_train, epochs=1800, batch_size=10, validation_split=0.1, callbacks=[ES], verbose=2)
+ES = EarlyStopping(monitor='val_loss', patience=90, mode='min', verbose=1, restore_best_weights=True)
+g = model.fit(x_train, y_train, epochs=180, batch_size=10, 
+            #   validation_split=0.1, 
+              callbacks=[ES], verbose=2)
 
 #4. 평가, 예측
 loss = model.evaluate(x_test, y_test)
 print('loss', loss)
 
 y_predict = model.predict(x_test)
+print(type(y_predict))
+print(type(y_test))
 
-# from sklearn.metrics import r2_score, accuracy_score
-# # r2=r2_score(y_test, y_predict)
-# acc = accuracy_score(y_test, y_predict)
-# # print('r2', r2)
-# print('acc', acc)
+# print(y_test)
+# print(y_predict)
 
+pre2 = y_predict.flatten() # 차원 펴주기
+pre3 = np.where(pre2 > 0.4, 1 , 0) #0.5보다크면 1, 작으면 0
+
+
+from sklearn.metrics import r2_score, accuracy_score
+r2=r2_score(y_test, pre3)
+acc = accuracy_score(y_test, pre3)
+print('loss', loss)
+print('r2', r2)
+print('acc', acc)
+'''
 print(y_predict)
 import matplotlib.pyplot as plt
 
@@ -74,8 +86,18 @@ plt.legend(loc='upper right') #라벨값위치 생략시 빈자리에 생성
 plt.show()
 
 print(y_predict)
+'''
+# #vali 적용
+# loss [0.6554861664772034, 0.640350878238678, 0.23137257993221283]
+# r2 -0.561643835616439
+# acc 0.6403508771929824
 
+#미적용
+# loss [0.6539859175682068, 0.640350878238678, 0.23066139221191406]
+# r2 -0.561643835616439
+# acc 0.6403508771929824
 
+#발리데이션값이 적어서 그런지 큰차이 없다
 
 
 

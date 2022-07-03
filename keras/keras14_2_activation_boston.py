@@ -34,14 +34,14 @@ model.add(Dense(5))
 model.add(Dense(1))
 
 #컴파일 훈련
-model.compile(loss = 'mse', optimizer = 'adam', metrics=['accracy', 'mae'])
+model.compile(loss = 'mse', optimizer = 'adam', metrics=['accuracy', 'mae'])
 #컴파일 전후 얼리스타핑 미니멈 혹은 맥시멈값을 patience 지켜보고 있다가 정지시키는 함수
 
 from tensorflow.python.keras.callbacks import EarlyStopping
 ES = EarlyStopping(monitor='val_loss', patience=10, mode='min', verbose=2, restore_best_weights=True)
 
 #훈련을 인스턴스 하나로 줄여주기
-h = model.fit(x_train, y_train, epochs=10, batch_size=10,
+h = model.fit(x_train, y_train, epochs=100, batch_size=10,
           validation_split=0.1, 
           callbacks=[ES], 
           verbose=3)
@@ -61,6 +61,7 @@ y_predict = model.predict(x_test)
 from sklearn.metrics import r2_score
 r2= r2_score(y_test, y_predict)
 print('r2', r2)
+print('loss', loss)
 
 #그리기
 
@@ -79,5 +80,12 @@ plt.ylabel('loss') #y축을 loss라 명하겠다
 plt.legend(loc='upper left') #그래프이름 표기를 위쪽왼쪽에 위치시키겠다(인수는 생략가능, 띄어쓰기= 그래프 빈자리에 생성됨)
 plt.show()#보여달라
 
+#vali 미적용
+# r2 -0.5474061321360475
+# loss [41.60723114013672, 0.0, 5.335869312286377]
 
+# #적용
+# r2 0.05849269602291585
+# loss [25.31559944152832, 0.0, 4.08815336227417]
 
+# 사이즈가 작은데도 상당히 큰 효과가 있었다. 리니어모델이라서 그런가?

@@ -159,7 +159,7 @@ import time
 #3.컴파일 훈련
 model.compile(loss = 'mse', optimizer = 'adam')
 start_time = time.time()
-model.fit(x_train, y_train, epochs = 2200, batch_size=200, verbose=1)
+model.fit(x_train, y_train, epochs = 22, batch_size=200, verbose=1)
 end_time = time.time()
 
 print('시간', end_time - start_time)
@@ -171,7 +171,7 @@ y_predict = model.predict(x_test)
 from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_predict)
 print('r2', r2)
-
+print(y_predict)
 #진짜 답안지
 y_summit = model.predict(test_set)
 submission['SalePrice'] = y_summit

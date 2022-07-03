@@ -36,6 +36,10 @@ print('y 컬럼', y.shape)
 x_train, x_test, y_train, y_test = train_test_split(x, y,
     train_size=0.99, shuffle=False)
 
+
+print(x_train)
+print(y_train)
+'''
 #2.모델구성
 
 model = Sequential()
@@ -102,3 +106,4 @@ submission.to_csv(path + 'submission.csv') #y_summit이 덮어씌어진 submissi
 # r2 0.7926264243669512
 # rmse 49.89975258447158
 # 0.3418304920196533
+'''
