@@ -47,7 +47,7 @@ model.add(Dense(5, input_dim=36))
 model.add(Dense(5, activation='sigmoid'))
 model.add(Dense(5, activation='sigmoid'))
 model.add(Dense(5, activation='relu'))
-model.add(Dense(5, activation='sigmoid'))
+model.add(Dense(1, activation='sigmoid'))
 
 #컴파일 훈련
 model.compile(loss = 'mae', optimizer = 'adam', metrics=['accuracy', 'mse'])
@@ -83,7 +83,15 @@ plt.legend(loc='center')
 y_summit = model.predict(test_set)
 
 print(y_summit.shape, submission['Id'].shape, test_set.shape)
-y_summit = y_summit.drop([0])
 print(y_summit)
-submission['SalePrice'] = y_summit['0']
+submission['SalePrice'] = y_summit
 submission.to_csv(path + 'submission.csv', index=True)
+
+# [[0.8555535  0.9634037  0.95638365 0.96676093 0.9461465 ]
+#  [0.8555535  0.9634037  0.95638365 0.96676093 0.9461465 ]
+#  [0.8555535  0.9634037  0.95638365 0.96676093 0.9461465 ]
+#  ...
+#  [0.8555535  0.9634037  0.95638365 0.96676093 0.9461465 ]
+#  [0.8555535  0.9634037  0.95638365 0.96676093 0.9461465 ]
+#  [0.8555535  0.9634037  0.95638365 0.96676093 0.9461465 ]]
+# 다섯줄의 중복된 값이 나옴
