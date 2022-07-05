@@ -20,7 +20,11 @@ print(datasets.DESCR)
 #     Features                     int
 #xy설정이 안됨
 x = datasets.data
+y = datasets.target
+print(y)
 y = datasets.target.reshape(-1,1)
+print(y)
+
 #일단 설정하고 프린트로 확인한다 reshape는 sklean 원핫인코딩을 위해 미리 설정해둔다
 print(x.shape, y.shape) #(581012, 54) (581012, 1)
 print(np.unique(y, return_counts=True))
@@ -80,4 +84,24 @@ y_predict = model.predict(x_test)
 #구하기전 y_test, y_predict갑을 출력해서 비교해본다
 print(y_test)
 print(y_predict)
-#test값과 ㅔㄱㄷ
+#test값과 predic값의 공통점은 각행의 값을 합하면 1 이 된다는 것과 가장큰 값이 있다는 것
+#그러므로 열을 기준으로 각 행의 값중 제일 큰값을 남겨서 y라벨값이 1~7만 남기고 나머지는 버려서 행렬 (n,)으로 둘다 바꾸어줘야 accuracy_score를 구할수 있다
+
+y_predict = np.argmax(y_predict, axis=1)
+#넘파이 argmax 인수값은 필요한 행렬 그리고 axis에는 1일 경우 열기준, 0일경우 행기준 남기는 것으로 생각됨
+y_test = np.argmax(y_test, axis=1)
+#argmax는 현재 파일에서 7개의 열중 가장 큰값의 인덱스를 반환하는 함수인것같다
+
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(y_test, y_predict)
+print('loss', loss)
+print('acc', acc)
+
+# loss [1.2064911127090454, 0.48764801025390625]
+# acc 0.4876480172572058
+# 돌긴돌지만 원핫엔코더가 어떤 방식으로 작동하는지 왜 그런 함수가 쓰이는지는 이해하지 못한 것 같다
+
+import matplotlib.pyplot as plt
+plt.gray()
+plt.matshow(datasets.images[1])
+plt.show()

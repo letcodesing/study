@@ -1,0 +1,50 @@
+import pandas as pd
+
+data =pd.DataFrame(pd.Series(['good','bad','worst','good', 'good', 'bad']))
+print(data)
+# new_data has two values that data does not have. 
+new_data= pd.DataFrame(pd.Series(['good','bad','worst','good', 'good', 'bad','excellent', 'perfect']))
+print(new_data)
+
+#        0
+# 0   good
+# 1    bad
+# 2  worst
+# 3   good
+# 4   good
+# 5    bad
+#            0
+# 0       good
+# 1        bad
+# 2      worst
+# 3       good
+# 4       good
+# 5        bad
+# 6  excellent
+# 7    perfect
+
+df = pd.get_dummies(data)
+print(df)
+col_list = df.columns.tolist()
+print(df)
+
+new_df = pd.get_dummies(new_data)
+print(new_data)
+# handle unknow by using .reindex and .fillna()
+new_df = new_df.reindex(columns=col_list).fillna(0.00)
+print(new_df)
+
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder(handle_unknown="ignore", sparse=False)
+encoder.fit(data)
+encoder.transform(new_data)
+
+print(data)
+print(new_data)
+
+to categorical 은 무조건 0부터 시작하기 때문에 라벨값이 1부터일경우 0, 3부터 시작할경우 0 1 2 를 생성한다
+해당하는 데이터전처리가 있다
+겟더미와 skleanr은 그냥 숫자만큼만 컬럼을 나눠준다
+그전에 라벨인코더로 문자를 숫자로 바꿔줘야하는데 겟더미는 랜덤으로 해준다
+즉 판다스의 겟더미가 하는 일은 해당 컬럼의 라벨종류별로 숫자를 지정해(아마도 랜덤?) 숫자만큼 컬럼을 만들고 해당하는 라벨컬럼만 True값 즉 1을 주고 나머지는 False = 0값을 주는 array를 만든다
+ 

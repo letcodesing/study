@@ -1,24 +1,27 @@
 import tensorflow as tf
 tf.random.set_seed(137)
 import numpy as np
-from sklearn.datasets  import load_digits
-
+from sklearn.datasets import fetch_covtype
 #1.데이터
-datasets = load_digits()
+datasets = fetch_covtype()
 x = datasets.data
 y = datasets.target
+print(y)
 print(x.shape, y.shape)
 print(np.unique(y, return_counts=True))
-# (1797, 64) (1797,)
-# (array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), array([178, 182, 177, 183, 181, 182, 181, 179, 174, 180], dtype=int64))
-# from sklearn.preprocessing import OneHotEncoder
-# encoder = OneHotEncoder()
-# encoder.fit(y)
-# y = encoder.transform(y).toarray()
-from tensorflow.keras.utils import to_categorical
-y = to_categorical(y)
+# (581012, 54) (581012,)
+# (array([1, 2, 3, 4, 5, 6, 7]), array([211840, 283301,  35754,   2747,   9493,  17367,  20510],
+#       dtype=int64))
+
+#sklearn 원핫엔코더에서 y데이터셋의 .reshape와 인코더 임포트~적용삭제
+import pandas as pd
+y = pd.get_dummies(y)
 print(y)
-print(y.shape)
+print(x.shape, y.shape)
+
+
+
+
 from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, train_size=0.7, shuffle=True, random_state=137)
@@ -28,17 +31,17 @@ from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.callbacks import EarlyStopping
 ES = EarlyStopping(monitor='val_loss', mode='min', patience=20, restore_best_weights=True)
 model = Sequential()
-model.add(Dense(5, input_dim=64))
+model.add(Dense(5, input_dim=54))
 model.add(Dense(100, activation='relu'))
 model.add(Dense(10, activation='relu'))
 model.add(Dense(100, activation='relu'))
 model.add(Dense(10, activation='sigmoid'))
 model.add(Dense(10, activation='relu'))
-model.add(Dense(10, activation='softmax'))
+model.add(Dense(7, activation='softmax'))
 
 #3.컴파일 훈련
 model.compile(loss = 'categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-hist = model.fit(x_train, y_train, epochs=100, verbose=1, 
+hist = model.fit(x_train, y_train, epochs=1, verbose=1, 
           validation_split=0.2,
           callbacks=ES)
 
@@ -47,12 +50,12 @@ loss = model.evaluate(x_test, y_test)
 
 y_predict = model.predict(x_test)
 # y_predict = model.predict(x_test[:5])
-print(y_test)
-print(y_predict)
+print(y_test.shape)
+print(y_predict.shape)
 y_predict = np.argmax(y_predict, axis= 1)
-y_test = np.argmax(y_test, axis= 1)
-print(y_test)
-print(y_predict)
+y_test = tf.argmax(y_test, axis= 1)
+print(y_test.shape)
+print(y_predict.shape)
 
 from sklearn.metrics import accuracy_score
 
@@ -68,10 +71,3 @@ print('loss : ', loss[0])
 print('acc :',  loss[1])
 #loss식의 두번째
 print('acc', acc)
-
-import matplotlib.pyplot as plt
-plt.gray()
-#흑백으로 그리겠다
-plt.matshow(datasets.images[1])
-
-plt.show()

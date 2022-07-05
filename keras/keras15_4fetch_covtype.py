@@ -6,6 +6,7 @@ from sklearn.datasets import fetch_covtype
 datasets = fetch_covtype()
 x = datasets.data
 y = datasets.target.reshape(-1,1)
+print(y)
 print(x.shape, y.shape)
 print(np.unique(y, return_counts=True))
 # (581012, 54) (581012,)
@@ -15,6 +16,10 @@ from sklearn.preprocessing import OneHotEncoder
 encoder = OneHotEncoder()
 encoder.fit(y)
 y = encoder.transform(y).toarray()
+
+print(y)
+print(x.shape, y.shape)
+
 from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, train_size=0.7, shuffle=True, random_state=137)
