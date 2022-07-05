@@ -1,85 +1,102 @@
-import tensorflow as tf
-tf.random.set_seed(23)
-#초기 랜덤웨이트값 정의
+
 
 from subprocess import call
 import pandas as pd
 
-#describe info insullsum 
-#y라벨의 종류가 무엇인지 확인하는 판다스 함수 =  np.unique
+
 path = './_data/kaggle_titanic/'
 train_set = pd.read_csv(path + 'train.csv', index_col=0)
 test_set = pd.read_csv(path + 'test.csv', index_col=0)
 
-print(train_set.shape)
-print(test_set.shape)
-print(test_set.columns)
-print(train_set.columns)
-print(test_set.columns.values)
-print(train_set.columns.values)
-#values 컬럼명의 데이터타입이 생략됨
+
+# print(train_set['Survived'].unique())
+# #서바이브드 고유라벨값이 무엇인지
+# print(train_set['Survived'].value_counts())
+# #value counts쓰면 한번에 나오는듯? 라벨값이 뭐고 몇개인지
+# print(train_set['Embarked'].value_counts())
+
+from sklearn.preprocessing import LabelEncoder
+#sk런에서 라벨엔코더를 임포트한다
+encoder = LabelEncoder()
+#엔코더를 불러와서 이름을 정해준다
+encoder.fit(train_set['Sex']) 
+#정의된 엔코더로 트레인셋 sex의 고유값을 분류한다 = 학습한다
+print(encoder.classes_)
+#['female' 'male']
+for i, label in enumerate(encoder.classes_):
+    print(i, '->', label)
+#긁어온것 분류한 고유값과 지정된 값을 출력하도록 한다
+tatu1 = encoder.transform(train_set['Sex'])
+#이를 변환하고 다른 이름으로 저장한다
+#inverse_trainsform 하면 숫자값을 고유값으로 변환할 수 있다
+print(encoder.inverse_transform([0,1]))
+#['female' 'male']
+encoder.fit(train_set['Embarked'])
+print(encoder.classes_)
+for i, label in enumerate(encoder.classes_):
+    print(i, '->', label)
+tatu2 = encoder.transform(train_set['Embarked'])
+#엠바크드 마찬가지
+print(encoder.inverse_transform([0,1,2]))
+#['C' 'Q' 'S'] 숫자를 고유라벨로 변환해 출력한다
+#해야할것 해당 인수들을 기존 데이터셋에 넣어야한다
+#해당열을 재정의하는 방식으로 계산된걸 다시 넣을 수 있다
+train_set['Sex'] = encoder.fit_transform(train_set['Sex'])
+train_set['Embarked'] = encoder.fit_transform(train_set['Embarked'])
+#인수가 리스트형식으로 들어가지는 않는듯 싶다
+#sex와 embarked에 숫자형식으로 들어간거 확인
+import numpy as np
+#이제 원핫인코딩
+#불러오기
+from sklearn.preprocessing import OneHotEncoder
+#정의하기
+ohe = OneHotEncoder(sparse=False)
+#sparse=True가 디폴트이며 이는 Matrix를 반환한다.
+# 원핫인코딩에서 필요한 것은 array이므로 sparse 옵션에 False를 넣어준다.
+#사용하기
+train_set['Sex'] = ohe.fit_transform(train_set['Sex'].values.reshape(-1,1))
+print(train_set['Sex'])
+print(train_set['Sex'].shape)
+train_set['Sex'].toarray()
+train_set['Embarked'] = ohe.fit_transform(train_set['Embarked'].values.reshape(-1,1))
+print(train_set['Embarked'])
+print(train_set['Embarked'].shape)
+
+# print(type(ohe.categories_))
+# #핫인코더가 나눈 카테고리는 리스트형태이다 이를 풀어야한다
+# print(ohe.categories_[0])
+#sex열 0번째행의 인수를 확인한다
 
 
-# pd.Series.unique(train_set)
-# pd.Series.value_counts(train_set)
-# (891, 12)
-# (418, 11)
-# Index(['PassengerId', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch',
-#        'Ticket', 'Fare', 'Cabin', 'Embarked'],
-#       dtype='object')
-# Index(['PassengerId', 'Survived', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp',
-#        'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked'],
-#       dtype='object')
-# print(train_set.info())
-# print(test_set.info())
-# print(train_set.describe())
-# print(test_set.describe())
- #   Column       Non-Null Count  Dtype
-# ---  ------       --------------  -----
-#  0   PassengerId  891 non-null    int64
-#  1   Survived     891 non-null    int64
-#  2   Pclass       891 non-null    int64
-#  3   Name         891 non-null    object
-#  4   Sex          891 non-null    object
-#  5   Age          714 non-null    float64
-#  6   SibSp        891 non-null    int64
-#  7   Parch        891 non-null    int64
-#  8   Ticket       891 non-null    object
-#  9   Fare         891 non-null    float64
-#  10  Cabin        204 non-null    object
-#  11  Embarked     889 non-null    object
- 
- 
-#  ---  ------       --------------  -----
-#  0   PassengerId  418 non-null    int64
-#  1   Pclass       418 non-null    int64
-#  2   Name         418 non-null    object
-#  3   Sex          418 non-null    object
-#  4   Age          332 non-null    float64
-#  5   SibSp        418 non-null    int64
-#  6   Parch        418 non-null    int64
-#  7   Ticket       418 non-null    object
-#  8   Fare         417 non-null    float64
-#  9   Cabin        91 non-null     object
-#  10  Embarked     418 non-null    object
-
-print(train_set.isnull().sum())
-print(test_set.isnull().sum())
-print(train_set['Survived'].unique())
-#서바이브드 고유라벨값이 무엇인지
-print(train_set['Survived'].value_counts())
-#value counts쓰면 한번에 나오는듯? 라벨값이 뭐고 몇개인지
-print(train_set['Embarked'].value_counts())
 
 
-train_set = pd.get_dummies(train_set, columns = ['Sex', 'Embarked'])
-print(list(train_set.columns))
-#트레인셋
 
 print(train_set.head())
-print(train_set.columns.values)
+
+# 만약 fit호출과정에서 보지못했던 클래스가 transform호출 시 나타나면 아래 오류 메시지가 발생한다.
+# "ValueError: unknown categorical feature present [  ] during transform"
+# 인코딩할 때는 sklearn OneHotEncoder를 이용한다.
+# 반대로 Decoder는 제공하지 않고 있어 디코딩할 때는 numpy의 argmax를 이용한다.
+
+# train_set = pd.get_dummies(train_set, columns = ['Sex', 'Embarked'])
+# print(list(train_set.columns))
+# #트레인셋
+
+print(train_set.head())
+# print(train_set.columns.values)
+
+#섹스랑 embarked tocategorical로 원핫인코딩하기 그러려면 라벨인코딩으으로 고유숫자값으로 변환해야함
+
+y=np.array([0,1,0,1,2])
+print(y)
+print(y.shape)
+y=np.array([0,1,0,1,2]).reshape(-1,1)
+print(y)
+print(y.shape)
 
 
+
+'''
 train_set=train_set.dropna()
 test_set=test_set.dropna()
 
@@ -174,3 +191,4 @@ print('acc', acc)
 #argmax 의 의의를 제대로 이해못함
 #아침에 와서 모든 기술이 다 들어간 코드 작성해보기
 
+'''
