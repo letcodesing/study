@@ -14,7 +14,7 @@ print(np.unique(y, return_counts=True))
 #       dtype=int64))
 
 #sklearn 원핫엔코더에서 y데이터셋의 .reshape와 인코더 임포트~적용삭제
-from keras.utils import to_categorical
+from tensorflow.python.keras.utils import to_categorical
 y = to_categorical(y-1)
 
 print(y)
@@ -36,13 +36,13 @@ model.add(Dense(5, input_dim=54))
 model.add(Dense(100, activation='relu'))
 model.add(Dense(10, activation='relu'))
 model.add(Dense(100, activation='relu'))
-model.add(Dense(10, activation='sigmoid'))
-model.add(Dense(10, activation='relu'))
+model.add(Dense(1000, activation='sigmoid'))
+model.add(Dense(1000, activation='relu'))
 model.add(Dense(7, activation='softmax'))
 
 #3.컴파일 훈련
 model.compile(loss = 'categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-hist = model.fit(x_train, y_train, epochs=10, verbose=1, 
+hist = model.fit(x_train, y_train, epochs=1000, verbose=1, 
           validation_split=0.2,
           callbacks=ES)
 

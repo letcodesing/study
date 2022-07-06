@@ -1,43 +1,42 @@
 import tensorflow as tf
 tf.random.set_seed(137)
 import numpy as np
-from sklearn.datasets import fetch_covtype
+from sklearn.datasets  import load_wine
+
 #1.데이터
-datasets = fetch_covtype()
+datasets = load_wine()
 x = datasets.data
-y = datasets.target
-print(y)
+y = datasets.target.reshape(-1,1)
 print(x.shape, y.shape)
 print(np.unique(y, return_counts=True))
-# (581012, 54) (581012,)
-# (array([1, 2, 3, 4, 5, 6, 7]), array([211840, 283301,  35754,   2747,   9493,  17367,  20510],
-#       dtype=int64))
+# (array([0, 1, 2]), array([59, 71, 48], dtype=int64))
 
-#sklearn 원핫엔코더에서 y데이터셋의 .reshape와 인코더 임포트~적용삭제
-import pandas as pd
-y = pd.get_dummies(y)
-print(y)
-print(x.shape, y.shape)
+print(datasets.DESCR)
 
-
-
-
+    # :Number of Instances: 178 (50 in each of three classes)
+    # :Number of Attributes: 13 numeric,
+print(datasets.feature_names)
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder()
+encoder.fit(y)
+y = encoder.transform(y).toarray()
 from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, train_size=0.7, shuffle=True, random_state=137)
+
 
 from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.callbacks import EarlyStopping
 ES = EarlyStopping(monitor='val_loss', mode='min', patience=20, restore_best_weights=True)
 model = Sequential()
-model.add(Dense(5, input_dim=54))
+model.add(Dense(5, input_dim=13))
 model.add(Dense(100, activation='relu'))
 model.add(Dense(10, activation='relu'))
 model.add(Dense(100, activation='relu'))
 model.add(Dense(10, activation='sigmoid'))
 model.add(Dense(10, activation='relu'))
-model.add(Dense(7, activation='softmax'))
+model.add(Dense(3, activation='softmax'))
 
 #3.컴파일 훈련
 model.compile(loss = 'categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
@@ -50,12 +49,13 @@ loss = model.evaluate(x_test, y_test)
 
 y_predict = model.predict(x_test)
 # y_predict = model.predict(x_test[:5])
-print(y_test.shape)
-print(y_predict.shape)
+print(y_test)
+print(y_predict)
+
 y_predict = np.argmax(y_predict, axis= 1)
-y_test = tf.argmax(y_test, axis= 1)
-print(y_test.shape)
-print(y_predict.shape)
+y_test = np.argmax(y_test, axis= 1)
+print(y_test)
+print(y_predict)
 
 from sklearn.metrics import accuracy_score
 
@@ -71,3 +71,18 @@ print('loss : ', loss[0])
 print('acc :',  loss[1])
 #loss식의 두번째
 print('acc', acc)
+
+#민맥스
+# loss :  0.24404345452785492
+# acc : 0.9629629850387573
+# acc 0.9629629629629629
+
+#스탠
+# loss :  0.12898489832878113
+# acc : 0.9629629850387573
+# acc 0.9629629629629629
+
+#스케일미적용
+# loss :  0.7572556138038635
+# acc : 0.6481481194496155
+# acc 0.6481481481481481

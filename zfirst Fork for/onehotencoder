@@ -48,3 +48,36 @@ to categorical 은 무조건 0부터 시작하기 때문에 라벨값이 1부터
 그전에 라벨인코더로 문자를 숫자로 바꿔줘야하는데 겟더미는 랜덤으로 해준다
 즉 판다스의 겟더미가 하는 일은 해당 컬럼의 라벨종류별로 숫자를 지정해(아마도 랜덤?) 숫자만큼 컬럼을 만들고 해당하는 라벨컬럼만 True값 즉 1을 주고 나머지는 False = 0값을 주는 array를 만든다
  
+ One-Hot Encoding은 언제?
+
+ 
+
+순서가 없을 때 (예, 국가명 )
+그리고 고유값의 개수가 많지 않으면 효율적
+ 
+
+Label Encoding은 언제?
+
+ 
+
+순서의 의미가 있을때 (유치원, 초등학교, 대학교 같은 등급, 사원, 대리, 과장, 부장 같은 직급?? )
+ 고유값의 개수가 많은데 One-hot Encoding은 당연히 메모리 소비가 많으므로 효율적이진 못하다. 
+ 
+ 겟더미는 고유값에 nan값이 있을겨우 칼럼을 생성하지 않는다
+ https://psystat.tistory.com/136
+ 
+ As we can see, we missed the column AgeGroup_45-65 and we got a new one column, the AgeGroup_65+. But we want to feed our model with the same columns of the train dataset. The trick is to use the reindex function.
+
+1
+2
+3
+X_test = X_test.reindex(columns = X_train.columns, fill_value=0)
+ 
+X_test
+
+결측값 처리
+
+pd.get_dummies(fruit['name'], dummy_na = True)
+[출처] [pandas] pd.get_dummies() :: One-Hot Encoding/원핫인코딩|작성자 밎이
+
+https://truman.tistory.com/189

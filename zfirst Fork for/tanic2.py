@@ -163,8 +163,9 @@ print('acc 스코어 :', acc)
 # # plt.legend(loc='upper right')
 # plt.legend()
 # plt.show()
+print(test_set)
 y_summit = model.predict(test_set)
-
+print(y_summit)
 gender_submission['Survived'] = y_summit
 submission = gender_submission.fillna(gender_submission.mean())
 submission [(submission <0.5)] = 0  
