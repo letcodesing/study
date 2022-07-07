@@ -60,6 +60,8 @@ print(test_set.isnull().sum())
 
 drop_cols = ['Cabin']
 train_set.drop(drop_cols, axis = 1, inplace =True)
+print(train_set)
+
 test_set = test_set.fillna(test_set.mean())
 train_set['Embarked'].fillna('S')
 train_set = train_set.fillna(train_set.mean())
@@ -175,4 +177,4 @@ submission.to_csv('test21.csv',index=True)
 
 
 # acc 스코어 : 0.7654320987654321
-
+'''

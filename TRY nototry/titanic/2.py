@@ -20,13 +20,13 @@ print(train_set.value_counts()) #데이터셋 전체를 넣으니 데이터전�
 print(train_set.shape)
 print(test_set.shape)
 
-tatu1 = pd.get_dummies(train_set['Sex'], prefix=['Sex'])
-tatu2 = pd.get_dummies(test_set['Sex'], prefix=['Sex'])
-
-#프리픽스를 붙여야 나눠지나?
+tatu1 = pd.get_dummies(train_set['Sex'])
+tatu2 = pd.get_dummies(test_set['Sex'])
+#프리픽스를 붙여야 나눠지나? 아니다
 train_set = pd.concat([train_set,tatu1], axis=1)
 test_set = pd.concat([test_set,tatu2], axis=1)
-#겟더미는 붙이는 과정이 필요하다 난값처리는 두가지 방법이 있는듯 하다
+#겟더미는 붙이는 과정이 필요하다 난값처리는 두가지 방법이 있는듯 하다 
+#원핫인코딩은 argmax 겟더미는 컨캣이 필요한듯하다
 
 
 
@@ -167,7 +167,7 @@ print(y_summit)
 print(y_summit.shape)
 # Y_summit 상태에서 처리
 gender_submission['Survived'] = y_summit
-# gender_submission.to_csv('submission.csv')
+# gender_submission.to_csv('submission.csv')    +
 # path를 추가 안하니 그냥 폴더에 csv 생성됨
 gender_submission = gender_submission.astype(int)
 gender_submission.to_csv(path + 'submission.csv', index=False)
