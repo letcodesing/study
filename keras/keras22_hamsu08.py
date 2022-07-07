@@ -23,10 +23,12 @@ print(x.shape, y.shape)
 from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, train_size=0.7, shuffle=True, random_state=137)
-from sklearn.preprocessing import MinMaxScaler, StandardScaler #대문자 클래스 약어도 ㄷ대문자로
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler, RobustScaler #대문자 클래스 약어도 ㄷ대문자로
 
 # scaler = MinMaxScaler()
-scaler = StandardScaler()
+# scaler = StandardScaler()
+# scaler = MaxAbsScaler()
+scaler = RobustScaler()
 scaler.fit(x_train)
 x_train = scaler.transform(x_train)
 x_test = scaler.transform(x_test)
@@ -35,18 +37,34 @@ print(np.min(x_train))
 print(np.max(x_train))
 print(np.min(x_test))
 print(np.max(x_test))
-from tensorflow.python.keras.layers import Dense
-from tensorflow.python.keras.models import Sequential
+# maxabs
+# -0.2762063227953411
+# 1.0
+# -0.2878535773710483
+# 1.0
+
+from tensorflow.python.keras.layers import Dense, Input
+from tensorflow.python.keras.models import Sequential, Model
 from tensorflow.python.keras.callbacks import EarlyStopping
 ES = EarlyStopping(monitor='val_loss', mode='min', patience=20, restore_best_weights=True)
-model = Sequential()
-model.add(Dense(5, input_dim=54))
-model.add(Dense(100, activation='relu'))
-model.add(Dense(10, activation='relu'))
-model.add(Dense(100, activation='relu'))
-model.add(Dense(10, activation='sigmoid'))
-model.add(Dense(10, activation='relu'))
-model.add(Dense(7, activation='softmax'))
+# model = Sequential()
+# model.add(Dense(5, input_dim=54))
+# model.add(Dense(100, activation='relu'))
+# model.add(Dense(10, activation='relu'))
+# model.add(Dense(100, activation='relu'))
+# model.add(Dense(10, activation='sigmoid'))
+# model.add(Dense(10, activation='relu'))
+# model.add(Dense(7, activation='softmax'))
+
+input1 = Input(shape=(54,))
+dense1 = Dense(5, activation='relu')(input1)
+dense2 = Dense(100, activation='relu')(dense1)
+dense3 = Dense(10, activation='relu')(dense2)
+dense4 = Dense(100, activation='relu')(dense3)
+dense5 = Dense(10, activation='sigmoid')(dense4)
+dense6 = Dense(10, activation='relu')(dense5)
+output1 = Dense(7, activation='softmax')(dense6)
+model = Model(inputs=input1, outputs=output1)
 
 #3.컴파일 훈련
 model.compile(loss = 'categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
@@ -95,3 +113,13 @@ print('acc', acc)
 # loss :  0.4592624306678772
 # acc : 0.813268780708313
 # acc 0.8132687718009913
+
+# maxabs
+# loss :  0.5848168730735779
+# acc : 0.7477510571479797
+# acc 0.7477510556269507
+
+# robust
+# loss :  0.5174779891967773
+# acc : 0.7876353859901428
+# acc 0.7876353956306223

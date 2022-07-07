@@ -73,6 +73,10 @@ print(train_set['Embarked'].value_counts())
 
 
 train_set = pd.get_dummies(train_set, columns = ['Sex', 'Embarked'])
+test_set = pd.get_dummies(test_set, columns = ['Sex', 'Embarked'])
+print(train_set)
+print(test_set)
+
 print(list(train_set.columns))
 #트레인셋
 
@@ -81,7 +85,7 @@ print(train_set.columns.values)
 
 
 train_set=train_set.dropna()
-test_set=test_set.dropna()
+test_set=test_set.fillna(train_set.mean())
 
 
 
@@ -117,7 +121,8 @@ from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dense
 from sklearn.model_selection import train_test_split
 
-x = train_set.drop(['Survived','Name', 'Ticket', 'Cabin'], axis=1)
+x = train_set.drop(['Survived', 'Name', 'Ticket', 'Cabin'], axis=1)
+test_set = test_set.drop(['Name', 'Ticket', 'Cabin'], axis=1)
 y = train_set['Survived']
 print(x.shape)
 print(y.shape)
@@ -144,33 +149,43 @@ hist = model.fit(x_train, y_train, epochs = 100, batch_size=32, validation_split
 #평가 예측
 loss = model.evaluate(x_test, y_test)
 y_predict = model.predict(x_test)
+y_predict[(y_predict<0.5)] = 0
+y_predict[(y_predict>=0.5)] = 1
 
-print(y_test)
-print(y_predict)
-print(y_test.shape)
-
-import numpy as np
-y_predict = np.argmax(y_predict, axis= 1)
+# import numpy as np
+# y_predict = np.argmax(y_predict, axis= 1)
 
 #패신저 아이디가 왜 y_test에 붙어서 나오는가?
+
+y_summit = model.predict(test_set)
+y_summit [(y_summit <0.5)] = 0  
+y_summit [(y_summit >=0.5)] = 1 
+print(y_summit)
 
 
 from sklearn.metrics import accuracy_score
 acc = accuracy_score(y_test, y_predict)
-
 print('loss', loss)
 print('acc', acc)
+print(test_set.shape, y_summit.shape)
+# ValueError: Failed to convert a NumPy array to a Tensor (Unsupported object type int).
+# 데이터에서 오브젝트값을 처리안한듯
 
 #현재 문제 y_predict값 nan값 나옴 이해못함 아마도 라벨인코딩 argmax 조합인것 같은데 다시 봐야함
 #pandas 함수 적용못함
 
-# y_summit = model.predict(test_set)
-# submission = pd.read_csv(path + 'gender_submission.csv')
-# submission['Survive'] = y_summit
-# submission.to_csv(path + 'submission.csv')
-# ValueError: Failed to convert a NumPy array to a Tensor (Unsupported object type int).
 
+submission = pd.read_csv(path + 'gender_submission.csv')
+submission['Survived'] = y_summit
+#칼럼값이 없으면 새로 만든ㄴ듯
+# 1.0으로 나와서 ㅇint처리 재정의로 해야하는듯
+submission = submission.astype(int)
+submission.to_csv(path + 'submission.csv', index=False)
+# ValueError: Failed to convert a NumPy array to a Tensor (Unsupported object type int).
 #현재 라벨인코딩 밋 원핫인코딩 3개 쓸수 없음으로 인해서 데이터셋 na를 전부 날렸다 알게되면 원핫인코딩으로 숫자변환해 쓸수 있을 것 추후 전처리를 배우면 상관관계를 분석해 이용할 수?
+# ValueError: Length of values (87) does not match length of index (418)
+# y서밋값은 테스트셋 행에 영향을 받음
+# 테스트셋이 87줄 밖에 안되는 이유가 dropna라고 판단 fillna로 채워줌
 #argmax 의 의의를 제대로 이해못함
 #아침에 와서 모든 기술이 다 들어간 코드 작성해보기
 

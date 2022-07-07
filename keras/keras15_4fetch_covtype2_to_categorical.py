@@ -14,7 +14,7 @@ print(np.unique(y, return_counts=True))
 #       dtype=int64))
 
 #sklearn 원핫엔코더에서 y데이터셋의 .reshape와 인코더 임포트~적용삭제
-from tensorflow.python.keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 y = to_categorical(y-1)
 
 print(y)

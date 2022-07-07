@@ -62,15 +62,15 @@ from tensorflow.python.keras.models import Sequential, Model, load_model
 from tensorflow.python.keras.layers import Dense, Input
 
 print(x.shape)
-model = Sequential()
+# model = Sequential()
 
-model.add(Dense(5, input_dim=13))
-model.add(Dense(5, activation='sigmoid'))
-model.add(Dense(5, activation='relu'))
-model.add(Dense(5, activation='sigmoid'))
-model.add(Dense(5))
-model.add(Dense(1))
-model.summary()
+# model.add(Dense(5, input_dim=13))
+# model.add(Dense(5, activation='sigmoid'))
+# model.add(Dense(5, activation='relu'))
+# model.add(Dense(5, activation='sigmoid'))
+# model.add(Dense(5))
+# model.add(Dense(1))
+# model.summary()
 
 # input1 = Input(shape=(13,))
 # dense1 = Dense(5)(input1)

@@ -113,8 +113,8 @@ test_set=test_set.dropna()
 #xy 설정하고 테스트 트레인셋 나눈고 모델구성 
 
 
-from tensorflow.python.keras.models import Sequential
-from tensorflow.python.keras.layers import Dense
+from tensorflow.python.keras.models import Sequential, Model
+from tensorflow.python.keras.layers import Dense, Input
 from sklearn.model_selection import train_test_split
 
 x = train_set.drop(['Survived','Name', 'Ticket', 'Cabin'], axis=1)
@@ -123,10 +123,12 @@ print(x.shape)
 print(y.shape)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, random_state=137)
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler, RobustScaler
 import numpy as np
 # scaler = MinMaxScaler()
-scaler = StandardScaler()
+# scaler = StandardScaler()
+# scaler = MaxAbsScaler()
+scaler = RobustScaler()
 scaler.fit(x_train)
 x_train = scaler.transform(x_train)
 x_test = scaler.transform(x_test)
@@ -135,15 +137,82 @@ print(np.max(x_train))
 print(np.min(x_test))
 print(np.max(x_test))
 
-model = Sequential()
-model.add(Dense(50, input_dim=10))
-# print(x.shape) #5
-model.add(Dense(100, activation='relu'))
-model.add(Dense(100, activation='sigmoid'))
-model.add(Dense(100, activation='relu'))
-model.add(Dense(100, activation='sigmoid'))
-model.add(Dense(100, activation='relu'))
-model.add(Dense(1, activation='sigmoid'))
+# maxabs
+# 0.0
+# 1.0
+# 0.0
+# 1.1428571428571428
+
+# robust
+# -1.4616666666666667
+# 7.120669082552589
+# -1.4583333333333333
+# 3.1755852420515667
+
+# model = Sequential()
+# model.add(Dense(50, input_dim=10))
+# # print(x.shape) #5
+# model.add(Dense(100, activation='relu'))
+# model.add(Dense(100, activation='sigmoid'))
+# model.add(Dense(100, activation='relu'))
+# model.add(Dense(100, activation='sigmoid'))
+# model.add(Dense(100, activation='relu'))
+# model.add(Dense(1, activation='sigmoid'))
+# model.summary()
+# Model: "sequential"
+# _________________________________________________________________
+# Layer (type)                 Output Shape              Param #
+# =================================================================
+# dense (Dense)                (None, 50)                550
+# _________________________________________________________________
+# dense_1 (Dense)              (None, 100)               5100
+# _________________________________________________________________
+# dense_2 (Dense)              (None, 100)               10100
+# _________________________________________________________________
+# dense_3 (Dense)              (None, 100)               10100
+# _________________________________________________________________
+# dense_4 (Dense)              (None, 100)               10100
+# _________________________________________________________________
+# dense_5 (Dense)              (None, 100)               10100
+# _________________________________________________________________
+# dense_6 (Dense)              (None, 1)                 101
+# =================================================================
+# Total params: 46,151
+# Trainable params: 46,151
+# Non-trainable params: 0
+input1= Input(shape=(10,))
+dense1 = Dense(50)(input1)
+dense2 = Dense(100, activation='relu')(dense1)
+dense3 = Dense(100, activation='sigmoid')(dense2)
+dense4 = Dense(100, activation='relu')(dense3)
+dense5 = Dense(100, activation='sigmoid')(dense4)
+dense6 = Dense(100, activation='relu')(dense5)
+output1 = Dense(1, activation='sigmoid')(dense6)
+model = Model(inputs=input1, outputs=output1)
+model.summary()
+# Model: "model"
+# _________________________________________________________________
+# Layer (type)                 Output Shape              Param #
+# =================================================================
+# input_1 (InputLayer)         [(None, 10)]              0
+# _________________________________________________________________
+# dense (Dense)                (None, 50)                550
+# _________________________________________________________________
+# dense_1 (Dense)              (None, 100)               5100
+# _________________________________________________________________
+# dense_2 (Dense)              (None, 100)               10100
+# _________________________________________________________________
+# dense_3 (Dense)              (None, 100)               10100
+# _________________________________________________________________
+# dense_4 (Dense)              (None, 100)               10100
+# _________________________________________________________________
+# dense_5 (Dense)              (None, 100)               10100
+# _________________________________________________________________
+# dense_6 (Dense)              (None, 1)                 101
+# =================================================================
+# Total params: 46,151
+# Trainable params: 46,151
+# Non-trainable params: 0
 
 #컴파일 훈련
 from tensorflow.python.keras.callbacks import EarlyStopping
@@ -195,4 +264,12 @@ print('acc', acc)
 
 # 스탠
 # loss [0.4650607705116272, 0.7678571343421936]
+# acc 0.26785714285714285
+
+# maxabs
+# loss [0.4505472183227539, 0.7142857313156128]
+# acc 0.26785714285714285
+
+# robust
+# loss [0.44520238041877747, 0.8035714030265808]
 # acc 0.26785714285714285

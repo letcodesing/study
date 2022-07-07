@@ -1,8 +1,8 @@
 #1. 데이터
 import numpy as np
 import pandas as pd
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Sequential, Model
+from tensorflow.keras.layers import Dense, Input
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 import time
@@ -35,10 +35,12 @@ print('y 컬럼', y.shape)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y,
     train_size=0.99, shuffle=False)
-from sklearn.preprocessing import MinMaxScaler, StandardScaler #대문자 클래스 약어도 ㄷ대문자로
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler, RobustScaler #대문자 클래스 약어도 ㄷ대문자로
 
 # scaler = MinMaxScaler()
-scaler = StandardScaler()
+# scaler = StandardScaler()
+# scaler = MaxAbsScaler()
+scaler = RobustScaler()
 scaler.fit(x_train)
 x_train = scaler.transform(x_train)
 x_test = scaler.transform(x_test)
@@ -47,22 +49,100 @@ print(np.min(x_train))
 print(np.max(x_train))
 print(np.min(x_test))
 print(np.max(x_test))
-
+# maxabs
+# 0.0
+# 1.0
+# 0.0
+# 1.0
+# robust
+# -1.9024390243902443
+# 6.382352941176471
+# -1.1883662803908204
+# 2.5294117647058822
 print(x_train)
 print(y_train)
 
 #2.모델구성
 
-model = Sequential()
-model.add(Dense(200, input_dim=9))
-model.add(Dense(200))
-model.add(Dense(200))
-model.add(Dense(200))
-model.add(Dense(200))
-model.add(Dense(200))
-model.add(Dense(200))
-model.add(Dense(200))
-model.add(Dense(1))
+# model = Sequential()
+# model.add(Dense(200, input_dim=9))
+# model.add(Dense(200))
+# model.add(Dense(200))
+# model.add(Dense(200))
+# model.add(Dense(200))
+# model.add(Dense(200))
+# model.add(Dense(200))
+# model.add(Dense(200))
+# model.add(Dense(1))
+# model.summary(0)
+
+# Model: "sequential"
+# _________________________________________________________________
+#  Layer (type)                Output Shape              Param #
+# =================================================================
+#  dense (Dense)               (None, 200)               2000
+
+#  dense_1 (Dense)             (None, 200)               40200
+
+#  dense_2 (Dense)             (None, 200)               40200
+
+#  dense_3 (Dense)             (None, 200)               40200
+
+#  dense_4 (Dense)             (None, 200)               40200
+
+#  dense_5 (Dense)             (None, 200)               40200
+
+#  dense_6 (Dense)             (None, 200)               40200
+
+#  dense_7 (Dense)             (None, 200)               40200
+
+#  dense_8 (Dense)             (None, 1)                 201
+
+# =================================================================
+# Total params: 283,601
+# Trainable params: 283,601
+# Non-trainable params: 0
+
+input1 = Input(shape=(9,))
+dense1 = Dense(200)(input1)
+dense2 = Dense(200)(dense1)
+dense3 = Dense(200)(dense2)
+dense4 = Dense(200)(dense3)
+dense5 = Dense(200)(dense4)
+dense6 = Dense(200)(dense5)
+dense7 = Dense(200)(dense6)
+dense8 = Dense(200)(dense7)
+output1 = Dense(1)(dense8)
+model = Model(inputs=input1, outputs=output1)
+model.summary(0)
+# Model: "model"
+# _________________________________________________________________
+#  Layer (type)                Output Shape              Param #
+# =================================================================
+#  input_1 (InputLayer)        [(None, 9)]               0
+
+#  dense (Dense)               (None, 200)               2000
+
+#  dense_1 (Dense)             (None, 200)               40200
+
+#  dense_2 (Dense)             (None, 200)               40200
+
+#  dense_3 (Dense)             (None, 200)               40200
+
+#  dense_4 (Dense)             (None, 200)               40200
+
+#  dense_5 (Dense)             (None, 200)               40200
+
+#  dense_6 (Dense)             (None, 200)               40200
+
+#  dense_7 (Dense)             (None, 200)               40200
+
+#  dense_8 (Dense)             (None, 1)                 201
+
+# =================================================================
+# Total params: 283,601
+# Trainable params: 283,601
+# Non-trainable params: 0
 
 #3. 컴파일 훈련
 model.compile(loss = 'mse', optimizer = 'adam')
@@ -129,3 +209,16 @@ submission.to_csv(path + 'submission.csv') #y_summit이 덮어씌어진 submissi
 # r2 0.8168118026787894
 # rmse 46.899739313256795
 # 0.3275487422943115
+print('loss', loss)
+print('r2', r2)
+print('rmse', rmse)
+
+# maxabas
+# loss 2092.291015625
+# r2 0.8257476250201532
+# rmse 45.74156687777579
+
+# robust
+# loss 2472.82177734375
+# r2 0.7940558715495929
+# rmse 49.72747314715278

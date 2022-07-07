@@ -142,10 +142,12 @@ x = train_set.drop(['SalePrice'], axis=1)
 y = train_set['SalePrice']
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size = 0.9, shuffle = False)
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler, RobustScaler
 import numpy as np
 # scaler = MinMaxScaler()
-scaler = StandardScaler()
+# scaler = StandardScaler()
+# scaler = MaxAbsScaler()
+scaler =RobustScaler()
 scaler.fit(x_train)
 x_train = scaler.transform(x_train)
 x_test = scaler.transform(x_test)
@@ -153,18 +155,81 @@ print(np.min(x_train))
 print(np.max(x_train))
 print(np.min(x_test))
 print(np.max(x_test))
+# maxbabs
+# -1.0
+# 1.0
+# -1.0
+# 1.5
+# robust
+# -8.0
+# 15500.0
+# -8.0
+# 2500.0
 #2. 모델
 
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Sequential, Model
+from tensorflow.keras.layers import Dense, Input
 
-model = Sequential()
-model.add(Dense(100, input_dim=80))
-model.add(Dense(200))
-model.add(Dense(200))
-model.add(Dense(200))
-model.add(Dense(200))
-model.add(Dense(1))
+# model = Sequential()
+# model.add(Dense(100, input_dim=80))
+# model.add(Dense(200))
+# model.add(Dense(200))
+# model.add(Dense(200))
+# model.add(Dense(200))
+# model.add(Dense(1))
+# model.summary()
+# Model: "sequential"
+# _________________________________________________________________
+#  Layer (type)                Output Shape              Param #
+# =================================================================
+#  dense (Dense)               (None, 100)               8100
+
+#  dense_1 (Dense)             (None, 200)               20200
+
+#  dense_2 (Dense)             (None, 200)               40200
+
+#  dense_3 (Dense)             (None, 200)               40200
+
+#  dense_4 (Dense)             (None, 200)               40200
+
+#  dense_5 (Dense)             (None, 1)                 201
+
+# =================================================================
+# Total params: 149,101
+# Trainable params: 149,101
+# Non-trainable params: 0
+input1 = Input(shape=(80,))
+dense1 = Dense(100)(input1)
+dense2 = Dense(200)(dense1)
+dense3 = Dense(200)(dense2)
+dense4 = Dense(200)(dense3)
+dense5 = Dense(200)(dense4)
+output1 = Dense(1)(dense5)
+model = Model(inputs=input1, outputs=output1)
+model.summary()
+# Model: "model"
+# _________________________________________________________________
+#  Layer (type)                Output Shape              Param #
+# =================================================================
+#  input_1 (InputLayer)        [(None, 80)]              0
+
+#  dense (Dense)               (None, 100)               8100
+
+#  dense_1 (Dense)             (None, 200)               20200
+
+#  dense_2 (Dense)             (None, 200)               40200
+
+#  dense_3 (Dense)             (None, 200)               40200
+
+#  dense_4 (Dense)             (None, 200)               40200
+
+#  dense_5 (Dense)             (None, 1)                 201
+
+# =================================================================
+# Total params: 149,101
+# Trainable params: 149,101
+# Non-trainable params: 0
+
 import time
 #3.컴파일 훈련
 model.compile(loss = 'mse', optimizer = 'adam')
@@ -206,3 +271,10 @@ submission.to_csv(path + 'submission.csv', index=False)
 # loss 950847104.0
 # r2 0.8184911978215939
 
+# maxabs
+# loss 2470333184.0
+# r2 0.5284339517784782
+
+# robust
+# loss 22663454720.0
+# r2 -3.3262651362095275

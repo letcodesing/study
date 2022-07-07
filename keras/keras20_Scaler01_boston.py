@@ -23,8 +23,10 @@ y = data_sets.target
 from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8, shuffle=False)
-# scaler = MinMaxScaler()
-scaler = StandardScaler()
+scaler = MinMaxScaler()
+# scaler = StandardScaler()
+x_train = scaler.fit_transform(x_train)
+x_test = scaler.transform(x_test)
 #스케일러정의
 scaler.fit(x_train)
 #핏한다
@@ -32,7 +34,7 @@ x_train = scaler.transform(x_train)
 #컬럼별로 스케일 해야하는데 이것을 함수정의자들이 예상하지 않았을까?
 #수치로 바꾼것을 본래 데이터셋으로 재정의한다
 x_test = scaler.transform(x_test)
-#x_test를 트레인에 맞춰서 변환한 값으로 변환한다
+#x_test를 트레인에 맞춰서 변환한 값으로 변환한다 - 트레인으로 피트한 값을 스케일러가 가지고 있고 그것으 ㄹ기준으로 트랜스폼하기 때문
 #이부분이 이해가 안됨
 print(np.min(x_train))
 print(np.max(x_train))

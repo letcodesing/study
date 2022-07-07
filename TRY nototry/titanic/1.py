@@ -32,16 +32,16 @@ test_set['Sex'] = lb.transform(test_set['Sex'])
 print(train_set['Sex'])
 print(test_set['Sex'])
 
-from sklearn.preprocessing import OneHotEncoder
-ohe = OneHotEncoder()
-ohe.fit(train_set['Sex'].values.reshape(-1,1))
-ohe.fit(test_set['Sex'].values.reshape(-1,1))
-print(ohe.categories_)
-l2 = ohe.transform(train_set['Sex'].values.reshape(-1,1)).toarray()
-#어쨌거나 엔코더.(피트_)트랜스폼(리쉐잎된 인수).toarray()가 핵심이라는 건 알았다 하지만 기존 데이터에 끼워넣기는 실패한 것 같다
-l1 = ohe.transform(test_set['Sex'].values.reshape(-1,1)).toarray()
-print(l1)
-print(l2)
+# from sklearn.preprocessing import OneHotEncoder
+# ohe = OneHotEncoder()
+# ohe.fit(train_set['Sex'].values.reshape(-1,1))
+# ohe.fit(test_set['Sex'].values.reshape(-1,1))
+# print(ohe.categories_)
+# l2 = ohe.transform(train_set['Sex'].values.reshape(-1,1)).toarray()
+# #어쨌거나 엔코더.(피트_)트랜스폼(리쉐잎된 인수).toarray()가 핵심이라는 건 알았다 하지만 기존 데이터에 끼워넣기는 실패한 것 같다
+# l1 = ohe.transform(test_set['Sex'].values.reshape(-1,1)).toarray()
+# print(l1)
+# print(l2)
 
 
 #입력된 값 0,1 확인
@@ -234,6 +234,11 @@ gender_submission['Survived'] = y_summit
 # path를 추가 안하니 그냥 폴더에 csv 생성됨
 gender_submission = gender_submission.astype(int)
 gender_submission.to_csv(path + 'submission.csv', index=False)
+from sklearn.metrics import r2_score
+r2= r2_score(y_test, y_predict)
+print('r2', r2)
+print('loss', loss)
+
 #index 자동생성돼서 삭제
 #결과값이 1이아니라 1.0이 나옴 .astype(int) 추가해줌
 
