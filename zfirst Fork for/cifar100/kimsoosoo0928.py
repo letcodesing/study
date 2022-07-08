@@ -68,3 +68,4 @@ loss = model.evaluate(x_test, y_test)
 # print("time : ", end_time)
 print('loss : ', loss[0])
 print('acc : ', loss[1])
+'''

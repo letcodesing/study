@@ -49,3 +49,5 @@ y_test = np.argmax(y_test, axis= 1)
 from sklearn.metrics import accuracy_score
 acc = accuracy_score(y_test, y_predict)
 print(acc)
+
+0.5312
