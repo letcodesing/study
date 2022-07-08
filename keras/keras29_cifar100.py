@@ -7,9 +7,12 @@ from tensorflow.python.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 print(x_train.shape, y_train.shape)
 
 
-x_train = x_train.reshape(50000,32,32,3)
-x_test = x_test.reshape(10000,32,32,3)
+x_train = x_train.reshape(50000,32,32,3, order='F')
+x_test = x_test.reshape(10000,32,32,3, order='F')
 print(x_train.shape)
+print(y_train.shape)
+print(y_train[:5])
+
 import numpy as np
 print(np.unique(y_train,return_counts=True))
 from tensorflow.keras.utils import to_categorical
@@ -18,7 +21,7 @@ y_test = to_categorical(y_test)
 
 #2.모델구성
 model = Sequential()
-model.add(Conv2D(filters=64, kernel_size=(3,3), padding='same', input_shape=(32,32,1))) 
+model.add(Conv2D(filters=64, kernel_size=(3,3), padding='same', input_shape=(32,32,3))) 
 model.add(MaxPooling2D())
 model.add(Conv2D(7, (2,2), padding='valid', activation='relu'))
 model.add(Conv2D(7, (2,2), padding='valid', activation='relu'))

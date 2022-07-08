@@ -2,13 +2,17 @@ import numpy as np
 from tensorflow.keras.datasets import cifar10
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
-
+# from sklearn.preprocessing import StandardScaler
+# scaler = StandardScaler()
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 print(x_train.shape, y_train.shape)
 print(x_test.shape, y_test.shape)
 
+
 x_train = x_train.reshape(50000,32,32,3)
 x_test = x_test.reshape(10000,32,32,3)
+# x_train = scaler.fit_transform(x_train)
+# x_test = scaler.transform(x_test)
 print(x_train.shape)
 import numpy as np
 print(np.unique(y_train,return_counts=True))
