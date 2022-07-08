@@ -132,16 +132,16 @@ import datetime as dt
 date = dt.datetime.now()
 date = date.strftime('%m%d %H%M')
 filepath = './_ModelCheckPoint/k25/4/'
-filename = '{epoch:04d}-{val_loss:.04f}'
+filename = '{epoch:04d}_{val_loss:.4f}.hdf5'
 #3. 컴파일 훈련
 model.compile(loss = 'binary_crossentropy', optimizer='adam', metrics=['accuracy', 
                                                                        'mse'] )
 from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
-MCP = ModelCheckpoint(monitor='val_loss', mode='auto', save_best_only=True, filepath=''.join([filepath,' ',date,' ',filename]))
+MCP = ModelCheckpoint(monitor='val_loss', mode='auto', save_best_only=True, filepath=''.join([filepath,date,' ',filename]))
 ES = EarlyStopping(monitor='val_loss', patience=90, mode='min', verbose=1, restore_best_weights=True)
 g = model.fit(x_train, y_train, epochs=180, batch_size=10, 
             #   validation_split=0.1, 
-              callbacks=[ES], verbose=2)
+              callbacks=[ES,MCP], verbose=2)
 
 #4. 평가, 예측
 loss = model.evaluate(x_test, y_test)
