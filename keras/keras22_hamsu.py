@@ -14,7 +14,7 @@ print(x.shape)
 
 #2.모델
 from tensorflow.python.keras.models import Sequential, Model
-from tensorflow.python.keras.layers import Dense,Input
+from tensorflow.python.keras.layers import Dense,Input, Dropout
 # model = Sequential()
 # # model.add(Dense(5, input_dim=3))
 # model.add(Dense(10, input_shape=(3,)))
@@ -29,7 +29,8 @@ input1 = Input(shape=(3,))
 dense1 = Dense(10)(input1)
 dense2 = Dense(5, activation='relu')(dense1)
 dense3 = Dense(5, activation='sigmoid')(dense2)
-dense4 = Dense(5)(dense3)
+drop1 = Dropout(0.2)(dense3)
+dense4 = Dense(5)(drop1)
 outpit1 = Dense(1)(dense4)
 model = Model(inputs=input1, outputs=outpit1)
 #레이어 재사용

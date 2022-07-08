@@ -77,6 +77,7 @@ y_summit = model.predict(test_set)
 #리니어값
 y_predict = y_predict.flatten()                 
 y_predict = np.where(y_predict >= 0.5, 1 , 0) 
+y_summit = np.maximum(0, y_summit)
 y_summit = y_summit.round()
 print(y_predict)
 print(y_summit)
