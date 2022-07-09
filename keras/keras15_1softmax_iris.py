@@ -14,18 +14,26 @@ print(datasets.DESCR)
 #                 - Iris-Setosa
 #                 - Iris-Versicolour
 #                 - Iris-Virginica
+# print(y)
 print(datasets.feature_names)
 x = datasets['data']
-y = datasets['target'].reshape(-1,1)
-print(x)
+y = datasets['target']
+# print(x)
 print(y)
 print(y.shape)
+y=y.reshape(-1,1)
+print(y)
+print(y.shape)
+
 print('y라벨값', np.unique(y)) #y라벨값 [0 1 2]
 
 from sklearn.preprocessing import OneHotEncoder
 encoder = OneHotEncoder()
 encoder.fit(y)
 y = encoder.transform(y).toarray()
+print(y)
+print(y.shape)
+
 # 베꼈는데 먼소린지 모르겠다. 일단 y를 정의하면서 리쉐잎으로 정렬하고 그것을 사이킷런 원핫엔코더로 fit처리 한다음에 다시 엔코더의 트랜스폼하고 투어레이로 정렬한다
 
 
@@ -113,6 +121,7 @@ print(y_test[:5])
 
 
 
+
 from sklearn.metrics import accuracy_score
 
 
@@ -154,3 +163,4 @@ print('acc', acc)
 # loss :  0.20700840651988983
 # acc : 0.9777777791023254
 # acc 0.9777777777777777
+'''

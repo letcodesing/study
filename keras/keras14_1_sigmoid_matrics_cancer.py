@@ -53,8 +53,8 @@ y_predict = model.predict(x_test)
 print(type(y_predict))
 print(type(y_test))
 
-# print(y_test)
-# print(y_predict)
+print(y_test)
+print(y_predict)
 
 pre2 = y_predict.flatten() # 차원 펴주기
 pre3 = np.where(pre2 > 0.4, 1 , 0) #0.5보다크면 1, 작으면 0

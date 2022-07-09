@@ -92,7 +92,7 @@ print("걸린시간 : ", end_time)
 loss = model.evaluate(x_test, y_test)
 print("loss : ", loss)
 
-print(bbb,"걸린시간 :",end_time)
+print("걸린시간 :",end_time)
 
 #y_predict = model.predict(x_test)
 
@@ -164,3 +164,5 @@ plt.show()
 # [과제2. boston, california, diabet,ddareuge, bike, house ]
 
 '''
+
+# gpu 걸린시간 : 71.29434394836426
