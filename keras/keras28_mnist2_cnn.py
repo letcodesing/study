@@ -22,7 +22,7 @@ print(y_train[:5])
 
 #2.모델구성
 model = Sequential()
-model.add(Conv2D(filters=64, kernel_size=(3,3), padding='same', input_shape=(28,28,1))) 
+model.add(Conv2D(filters=64, kernel_size=(3,3), padding='valid', input_shape=(28,28,1))) 
 model.add(MaxPooling2D())
 model.add(Conv2D(7, (2,2), padding='valid', activation='relu'))
 model.add(Conv2D(7, (2,2), padding='valid', activation='relu'))

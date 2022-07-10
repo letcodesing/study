@@ -6,7 +6,7 @@ model.add(Conv2D(filters=64, kernel_size=(3,3), padding='same', input_shape=(28,
 # conv2d (Conv2D)              (None, 8, 8, 10)          100 유지
 model.add(MaxPooling2D())
 # 맥스풀링은 반으로줄이나?
-model.add(Conv2D(7, (2,2), padding='valid', activation='relu'))
+model.add(Conv2D(7, (2,2), padding='same', activation='relu'))
 # conv2d_1 (Conv2D)            (None, 7, 7, 7)           287
 model.add(Flatten())
 model.add(Dense(32, activation='relu'))

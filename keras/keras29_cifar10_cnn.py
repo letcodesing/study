@@ -35,7 +35,7 @@ model.summary()
 #3.컴파일 훈련
 
 model.compile(loss='categorical_crossentropy', optimizer='adam')
-model.fit(x_train, y_train, epochs=10, batch_size=20)
+model.fit(x_train, y_train, epochs=10, batch_size=610)
 
 print(y_test)
 #4.평가 훈련
