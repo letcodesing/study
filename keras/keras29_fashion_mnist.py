@@ -6,8 +6,8 @@ from tensorflow.python.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
 print(x_train.shape, y_train.shape)
 print(x_test.shape, y_test.shape)
-
-x_train = x_train.reshape(60000,28,28,1)
+print(x_train[:100])
+x_train = x_train.re""" shape(60000,28,28,1)
 x_test = x_test.reshape(10000,28,28,1)
 print(x_train.shape)
 
@@ -47,4 +47,4 @@ from sklearn.metrics import accuracy_score
 acc = accuracy_score(y_test, y_predict)
 print(acc)
 
-# 0.8865
+# 0.8865 """

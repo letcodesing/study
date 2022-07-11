@@ -2,7 +2,7 @@ from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dense, Conv2D, Flatten, MaxPooling2D
 
 model = Sequential()
-model.add(Conv2D(filters=64, kernel_size=(3,3), padding='same', input_shape=(28,28,1))) 
+model.add(Conv2D(filters=10, kernel_size=(3,3), padding='same', input_shape=(28,28,1))) 
 # conv2d (Conv2D)              (None, 8, 8, 10)          100 유지
 model.add(MaxPooling2D())
 # 맥스풀링은 반으로줄이나?

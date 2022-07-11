@@ -8,7 +8,10 @@ from tensorflow.python.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 print(x_train.shape, y_train.shape)
 print(x_test.shape, y_test.shape)
 
-
+import matplotlib.pyplot as plt
+plt.imshow(x_train[10000], 'gray')
+plt.show()
+""" 
 x_train = x_train.reshape(50000,32,32,3)
 x_test = x_test.reshape(10000,32,32,3)
 # x_train = scaler.fit_transform(x_train)
@@ -50,4 +53,4 @@ from sklearn.metrics import accuracy_score
 acc = accuracy_score(y_test, y_predict)
 print(acc)
 
-0.5312
+0.5312 """

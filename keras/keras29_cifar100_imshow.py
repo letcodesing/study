@@ -7,8 +7,12 @@ from tensorflow.python.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 print(x_train.shape, y_train.shape)
 
 
-x_train = x_train.reshape(50000,32*32*3)
-x_test = x_test.reshape(10000,32*32*3)
+x_train = x_train.reshape(50000,32,32,3)
+x_test = x_test.reshape(10000,32,32,3)
+import matplotlib.pyplot as plt
+plt.imshow(x_train[49999], 'winter')
+plt.show()
+""" 
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler, MaxAbsScaler, QuantileTransformer, PowerTransformer
 
 scaler = StandardScaler()
@@ -62,4 +66,4 @@ y_test = np.argmax(y_test, axis= 1)
 from sklearn.metrics import accuracy_score
 acc = accuracy_score(y_test, y_predict)
 print(acc)
-0.2286
+0.2286 """
