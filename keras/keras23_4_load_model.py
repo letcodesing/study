@@ -63,7 +63,7 @@ from tensorflow.python.keras.layers import Dense, Input
 
 print(x.shape)
 model = Sequential()
-model.sa
+
 # model.add(Dense(5, input_dim=13))
 # model.add(Dense(5, activation='sigmoid'))
 # model.add(Dense(5, activation='relu'))
@@ -72,17 +72,17 @@ model.sa
 # model.add(Dense(1))
 # model.summary()
 
-# input1 = Input(shape=(13,))
-# dense1 = Dense(5)(input1)
-# dense2 = Dense(5, activation='sigmoid')(dense1)
-# dense3 = Dense(5, activation='relu')(dense2)
-# dense4 = Dense(5, activation='sigmoid')(dense3)
-# dense5 = Dense(5)(dense4)
-# output1 = Dense(1)(dense5)
-# model = Model(inputs=input1, outputs=output1)
-# model.summary()
+input1 = Input(shape=(13,))
+dense1 = Dense(5)(input1)
+dense2 = Dense(5, activation='sigmoid')(dense1)
+dense3 = Dense(5, activation='relu')(dense2)
+dense4 = Dense(5, activation='sigmoid')(dense3)
+dense5 = Dense(5)(dense4)
+output1 = Dense(1)(dense5)
+model = Model(inputs=input1, outputs=output1)
+model.summary()
 
-model = load_model('./_save/keras23_3_save_model.h5')
+# model = load_model('./_save/keras23_3_save_model.h5')
 
 
 #컴파일 훈련

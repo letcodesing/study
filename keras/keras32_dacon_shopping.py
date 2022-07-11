@@ -116,9 +116,9 @@ print(test_set.info())
 import numpy as np
 #xy나누고 언임플로이 스케일링
 #프로모션5 테스트셋은 꽉차있기때문에 해당부분으로 트레인셋채움
-x = train_set.drop(['Store', 'Date','Weekly_Sales','IsHoliday','Promotion1','Promotion2','Promotion3','Promotion4','Promotion5'], axis=1)
+x = train_set.drop(['Store', 'Date','Weekly_Sales','IsHoliday','Promotion1','Promotion2','Promotion3','Promotion4'], axis=1)
 #test_set도 같이 처리 대신 답안열은 제거 서브미션에 붙어있으므로
-test_set = test_set.drop(['Store', 'Date','IsHoliday','Promotion1','Promotion2','Promotion3','Promotion4','Promotion5'], axis=1)
+test_set = test_set.drop(['Store', 'Date','IsHoliday','Promotion1','Promotion2','Promotion3','Promotion4'], axis=1)
 y= train_set['Weekly_Sales']
 #와꾸확인
 print(test_set.shape, submission.shape) #(180, 8) (180, 1)
@@ -186,17 +186,17 @@ filename = '{epoch:04d} {val_loss:.4f}.hdf5'
 es = EarlyStopping(monitor = 'val_loss', mode='min',restore_best_weights=True, patience=10)
 mcp = ModelCheckpoint(monitor='val_loss', mode='auto', save_best_only=True, filepath = ''.join(['./_ModelCheckPoint/dacon_shop/1.hdf5']))
 # 일단 덴스모델로 돌리고 이후  shape로 전환
-input1 = Input(shape=(3,))
-dense1 = Dense(units=10, activation='linear')(input1)
-drop2 = Dropout(0.2)(dense1)
-dense2 = Dense(units=100, activation='relu')(drop2)
-dense3 = Dense(units=10, activation='sigmoid')(dense2)
-dense4 = Dense(units=100, activation='relu')(dense3)
-drop3 = Dropout(0.2)(dense4)
-dense5 = Dense(units=10, activation='sigmoid')(drop3)
-output1 = Dense(units=1, activation='linear')(dense5)
-model = Model(inputs=input1, outputs=output1)
-model.summary()
+# input1 = Input(shape=(4,))
+# dense1 = Dense(units=10, activation='linear')(input1)
+# drop2 = Dropout(0.2)(dense1)
+# dense2 = Dense(units=100, activation='relu')(drop2)
+# dense3 = Dense(units=10, activation='sigmoid')(dense2)
+# dense4 = Dense(units=100, activation='relu')(dense3)
+# drop3 = Dropout(0.2)(dense4)
+# dense5 = Dense(units=10, activation='sigmoid')(drop3)
+# output1 = Dense(units=1, activation='linear')(dense5)
+# model = Model(inputs=input1, outputs=output1)
+# model.summary()
 # Layer (type)                 Output Shape              Param #
 # =================================================================
 # input_1 (InputLayer)         [(None, 9)]               0
@@ -221,12 +221,13 @@ model.summary()
 # Trainable params: 551
 # Non-trainable params: 0
 #모델세이브는 fit 다음에
-import time
-model.compile(loss = 'mse', optimizer='adam', metrics=['accuracy', 'mae'])
-start_time = time.time()
-hist = model.fit(x_train,y_train,epochs=100,batch_size=10,verbose=4,callbacks=[es,mcp],validation_split=0.2)
-end_time = time.time()-start_time
-model.save='./_save/dacon_shop1.h5'
+# import time
+# model.compile(loss = 'mse', optimizer='adam', metrics=['accuracy', 'mae'])
+# start_time = time.time()
+# hist = model.fit(x_train,y_train,epochs=10,batch_size=10,verbose=1,callbacks=[es,mcp],validation_split=0.2)
+# end_time = time.time()-start_time
+# model.save('./_save/dacon_shop1.h5') 
+model = load_model('./_save/dacon_shop1.h5')
 
 # 평가및 예측
 loss = model.evaluate(x_test, y_test)
@@ -236,7 +237,7 @@ print(y_predict)
 print(y_summit)
 #원핫인코딩 트레인셋만 적용해서 테스트셋넣은 y서밋값이 에러남 
 #답안지 입력
-submission['Weekly Sales'] = y_summit
+submission['Weekly_Sales'] = y_summit
 submission.to_csv(path +'submission.csv')
 
 from sklearn.metrics import r2_score
