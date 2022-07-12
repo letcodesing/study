@@ -79,7 +79,7 @@ print(test_set.info())
 #dims값 date 제외 8
 
 #x,y 나누기
-
+train_set=train_set.dropna()
 x = train_set.drop(['casual', 'registered', 'count'], axis=1)
 y = train_set['count']
 
@@ -91,10 +91,12 @@ from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.9, shuffle=False)
 
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler, RobustScaler
 import numpy as np
-scaler = MinMaxScaler()
+# scaler = MinMaxScaler()
 # scaler = StandardScaler()
+scaler = MaxAbsScaler()
+# scaler = RobustScaler()
 scaler.fit(x_train)
 x_train = scaler.transform(x_train)
 x_test = scaler.transform(x_test)
@@ -102,7 +104,11 @@ print(np.min(x_train))
 print(np.max(x_train))
 print(np.min(x_test))
 print(np.max(x_test))
-
+# robust
+# -2.0
+# 4.4014745308310985
+# -1.4838709677419355
+# 3.001340482573726
 # def tanh(q):
 #     p_exp_q = np.exp(q)
 #     m_exp_q = np.exp(-q)
@@ -112,26 +118,86 @@ print(np.max(x_test))
 
 #트레인 테스트셋 나눴으므로 모델구성
 
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.python.keras.models import Sequential, Model
+from tensorflow.python.keras.layers import Dense, Input
+from tensorflow.python.keras.callbacks import ModelCheckpoint
+import datetime as dt
+date = dt.datetime.now()
+date=date.strftime('%m%d %H%M')
+filename = '{epoch:04d} {val_loss:.4f}.hdf5'
+filepath = './_ModelCheckPoint/k25/10/'
+mcp = ModelCheckpoint(filepath=([filepath,date,' ',filename]),monitor='val_loss', mode='auto', save_best_only=True)
 
 model = Sequential()
 model.add(Dense(100, input_dim=8))
 model.add(Dense(200))
-model.add(Dropout(0.3))
 model.add(Dense(200))
 model.add(Dense(200))
-model.add(Dropout(0.3))
 model.add(Dense(200))
-model.add(Dropout(0.2))
 model.add(Dense(200))
 model.add(Dense(1))
-#x컬럼 8개 필요 y값은 3개이므로
+model.summary()
+# x컬럼 8개 필요 y값은 3개이므로
+# Model: "sequential"
+# _________________________________________________________________
+#  Layer (type)                Output Shape              Param #
+# =================================================================
+#  dense (Dense)               (None, 100)               900
+
+#  dense_1 (Dense)             (None, 200)               20200
+
+#  dense_2 (Dense)             (None, 200)               40200
+
+#  dense_4 (Dense)             (None, 200)               40200
+
+#  dense_5 (Dense)             (None, 200)               40200
+
+#  dense_6 (Dense)             (None, 1)                 201
+
+# =================================================================
+# Total params: 182,101
+# Trainable params: 182,101
+# Non-trainable params: 0
+
+# input1 = Input(shape=(8,))
+# dense1 = Dense(100)(input1)
+# dense2 = Dense(200)(dense1)
+# dense3 = Dense(200)(dense2)
+# dense4 = Dense(200)(dense3)
+# dense5 = Dense(200)(dense4)
+# dense6 = Dense(200)(dense5)
+# output1 = Dense(1)(dense6)
+# model = Model(inputs=input1, outputs=output1)
+# model.summary()
+# Model: "model"
+# _________________________________________________________________
+#  Layer (type)                Output Shape              Param #
+# =================================================================
+#  input_1 (InputLayer)        [(None, 8)]               0
+
+#  dense (Dense)               (None, 100)               900
+
+#  dense_1 (Dense)             (None, 200)               20200
+
+#  dense_2 (Dense)             (None, 200)               40200
+
+#  dense_3 (Dense)             (None, 200)               40200
+
+#  dense_4 (Dense)             (None, 200)               40200
+
+#  dense_5 (Dense)             (None, 200)               40200
+
+#  dense_6 (Dense)             (None, 1)                 201
+
+# =================================================================
+# Total params: 182,101
+# Trainable params: 182,101
+# Non-trainable params: 0
 
 #3.컴파일 훈련
 
 model.compile(loss = 'mse', optimizer = 'adam')
-model.fit(x_train, y_train, epochs=2500, batch_size=200, verbose=1)
+model.fit(x_train, y_train, epochs=2500, batch_size=200, verbose=1, validation_split=0.2, callbacks=mcp)
 
 #4.평가 예측
 
@@ -191,3 +257,8 @@ submission['SalePrice'] = y_predict
 submission.to_csv(path + 'submission.csv')
 
 #민맥스
+
+# 로버스트
+# loss 37050.65625
+# r2 0.016745909987116447
+# rmse 192.4854757712525
