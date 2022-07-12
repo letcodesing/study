@@ -81,7 +81,7 @@ model.add(Conv2D(filters=64, kernel_size=(1, 1),   # 출력(4,4,10)
                                                                                            
 
  #    (kernel_size * channls) * filters = summary Param 개수(CNN모델)  
-model.add(Conv2D(32, (1,1),  #인풋쉐이프에 행값은 디폴트는 32
+model.add(Conv2D(32, (1,1), #인풋쉐이프에 행값은 디폴트는 32
                  padding = 'same',         # 디폴트값(안준것과 같다.) 
                  activation= 'swish'))    # 출력(3,3,7)       
 model.add(Conv2D(64, (1,1), 
