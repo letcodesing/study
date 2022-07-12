@@ -25,7 +25,7 @@
 # id : 샘플 아이디
 # Weekly_Sales : 주간 매출액 (목표 예측값)
 
-path = './_data/dacon_shop/'
+path = 'c:/study/_data/dacon_shop/'
 import pandas as pd
 train_set = pd.read_csv(path +'train.csv', index_col=0)
 test_set = pd.read_csv(path +'test.csv', index_col=0)
@@ -186,17 +186,22 @@ filename = '{epoch:04d} {val_loss:.4f}.hdf5'
 es = EarlyStopping(monitor = 'val_loss', mode='min',restore_best_weights=True, patience=10)
 mcp = ModelCheckpoint(monitor='val_loss', mode='auto', save_best_only=True, filepath = ''.join(['./_ModelCheckPoint/dacon_shop/1.hdf5']))
 # 일단 덴스모델로 돌리고 이후  shape로 전환
-# input1 = Input(shape=(4,))
-# dense1 = Dense(units=10, activation='linear')(input1)
-# drop2 = Dropout(0.2)(dense1)
-# dense2 = Dense(units=100, activation='relu')(drop2)
-# dense3 = Dense(units=10, activation='sigmoid')(dense2)
-# dense4 = Dense(units=100, activation='relu')(dense3)
-# drop3 = Dropout(0.2)(dense4)
-# dense5 = Dense(units=10, activation='sigmoid')(drop3)
-# output1 = Dense(units=1, activation='linear')(dense5)
-# model = Model(inputs=input1, outputs=output1)
-# model.summary()
+x_train = x_train.reshape(-1,2,2,1)
+x_test = x_test.reshape(-1,2,2,1)
+test_set=test_set.reshape(-1,2,2,1
+                          )
+input1 = Input(shape=(2,2,1))
+dense1 = Conv2D(filters=132, kernel_size=(2,2), activation='linear', padding='same')(input1)
+drop2 = Dropout(0.2)(dense1)
+dense2 = Conv2D(filters=100, kernel_size=(2,2),activation='relu', padding='same')(drop2)
+dense3 = Conv2D(filters=10, kernel_size=(2,2),activation='sigmoid', padding='same')(dense2)
+dense4 = Conv2D(filters=100, kernel_size=(2,2),activation='relu', padding='same')(dense3)
+drop3 = Dropout(0.2)(dense4)
+flat = Flatten()(drop3)
+dense5 = Dense(units=10, activation='sigmoid')(flat)
+output1 = Dense(units=1, activation='linear')(dense5)
+model = Model(inputs=input1, outputs=output1)
+model.summary()
 # Layer (type)                 Output Shape              Param #
 # =================================================================
 # input_1 (InputLayer)         [(None, 9)]               0

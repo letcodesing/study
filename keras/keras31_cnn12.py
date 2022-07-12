@@ -7,7 +7,7 @@ import pandas as pd
 
 #describe info insullsum 
 #y라벨의 종류가 무엇인지 확인하는 판다스 함수 =  np.unique
-path = './_data/kaggle_titanic/'
+path = 'c:/study/_data/kaggle_titanic/'
 train_set = pd.read_csv(path + 'train.csv', index_col=0)
 test_set = pd.read_csv(path + 'test.csv', index_col=0)
 
@@ -134,10 +134,11 @@ print(np.min(x_train))
 print(np.max(x_train))
 print(np.min(x_test))
 print(np.max(x_test))
-x_train=x_train.reshape(-1,2,2,2)
-x_test=x_test.reshape(-1,2,2,2)
+print(x_train.shape, x_test.shape)
+x_train=x_train.reshape(-1,2,5,1)
+x_test=x_test.reshape(-1,2,5,1)
 model = Sequential()
-model.add(Dense(50, input_dim=10))
+model.add(Dense(50, input_shape=(2,5,1)))
 # print(x.shape) #5
 model.add(Dense(100, activation='relu'))
 model.add(Dropout(0.3))
