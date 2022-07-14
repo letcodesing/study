@@ -126,6 +126,9 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, random
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 import numpy as np
 # scaler = MinMaxScaler()
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestRegressor
+model_input_var1 = RandomForestRegressor(criterion = 'mse')
 scaler = StandardScaler()
 scaler.fit(x_train)
 x_train = scaler.transform(x_train)
@@ -137,6 +140,7 @@ print(np.max(x_test))
 print(x_train.shape, x_test.shape)
 x_train=x_train.reshape(-1,2,5,1)
 x_test=x_test.reshape(-1,2,5,1)
+model_input_var1=
 model = Sequential()
 model.add(Dense(50, input_shape=(2,5,1)))
 # print(x.shape) #5

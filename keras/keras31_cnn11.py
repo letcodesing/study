@@ -1,7 +1,7 @@
 #1. 데이터 불러오기
 
 import pandas as pd
-path = './_data/kaggle_house/'
+path = 'c:/study/_data/kaggle_house/'
 train_set = pd.read_csv(path + 'train.csv')
 test_set = pd.read_csv(path + 'test.csv')
 submission = pd.read_csv(path + 'sample_submission.csv')
