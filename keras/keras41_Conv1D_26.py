@@ -1,7 +1,7 @@
 from keras.datasets import fashion_mnist
 from matplotlib.cbook import flatten
 from tensorflow.python.keras.models import Sequential, Model
-from tensorflow.python.keras.layers import Dense, Input, Dropout, Conv2D,LSTM,Conv1D,MaxPool1D,Flatten
+from tensorflow.python.keras.layers import Dense, Input, Dropout, Conv2D,LSTM,Conv1D,MaxPool1D,Flatten,Reshape
 import pandas as pd
 import numpy as np
 #1.데이터
@@ -32,8 +32,11 @@ dense2 = MaxPool1D()(dense1)
 dense3 = Dense(100)(dense2)
 dense4 = Dense(100)(dense3)
 # flat = Flatten()
-output1 = Dense(10)(dense4)
-model = Model(inputs=input1, outputs=output1)
+dense5 = Dense(10)(dense4)
+# res = Reshape((220))(output1)
+flat = Flatten()(dense5)
+dense6 = Dense(10)(flat)
+model = Model(inputs=input1, outputs=dense6)
 model.summary()
 
 

@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from sklearn.datasets import load_breast_cancer
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dense
@@ -6,7 +7,7 @@ from sklearn.model_selection import train_test_split
 
 #1.데이터
 data_sets = load_breast_cancer()
-print(data_sets.DESCR)
+# print(data_sets.DESCR)
 # :Number of Instances: 569
 
 #     :Number of Attributes: 30 numeric
@@ -18,11 +19,12 @@ y = data_sets['target']
 # x = data_sets.data
 # y = data_sets.target
 #sklearn 에서 쓰는 예제불러오기
-
-print(x.shape, y.shape)
-print(y)
+# print(np.unique(x,return_counts=True))
+print(x['mean radius'].value_counts())
+# print(x.shape, y.shape)
+# print(y)
 #y는 0아니면 1이다
-
+""" 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8, random_state=66)
 
 #2.모델
@@ -35,7 +37,7 @@ model.add(Dense(100))
 model.add(Dense(100, activation='sigmoid'))
 model.add(Dense(100))
 model.add(Dense(1, activation='sigmoid'))
-
+model.summary()
 #3. 컴파일 훈련
 model.compile(loss = 'binary_crossentropy', optimizer='adam', metrics=['accuracy', 
                                                                        'mse'] )
@@ -101,3 +103,4 @@ print(y_predict)
 
 
 
+ """

@@ -34,7 +34,7 @@ from tensorflow.python.keras.callbacks import EarlyStopping
 ES = EarlyStopping(monitor='val_loss', mode='min', patience=20, restore_best_weights=True)
 model = Sequential()
 model.add(Conv1D(32,1,input_shape=(1,13)))
-model.add(MaxPool1D())
+# model.add(MaxPool1D())
 model.add(Flatten())
 model.add(Dense(100, activation='relu'))
 model.add(Dropout(0.3))
@@ -104,3 +104,8 @@ print('acc', acc)
 # loss :  1.091688632965088
 # acc : 0.40740740299224854
 # acc 0.4074074074074074
+
+# conv1d
+# loss :  1.1394187211990356
+# acc : 0.29629629850387573
+# acc 0.2962962962962963

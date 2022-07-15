@@ -153,7 +153,7 @@ model.add(Dense(100, activation='sigmoid'))
 model.add(Dropout(0.2))
 model.add(Dense(100, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
-
+model.summary()
 #컴파일 훈련
 from tensorflow.python.keras.callbacks import EarlyStopping
 ES = EarlyStopping(monitor='val_loss', mode='min', patience=50, restore_best_weights=True)

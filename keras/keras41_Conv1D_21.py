@@ -127,12 +127,12 @@ date=date.strftime('%m%d %H%M')
 filename = '{epoch:04d} {val_loss:.4f}.hdf5'
 filepath = './_ModelCheckPoint/k25/10/'
 mcp = ModelCheckpoint(filepath=([filepath,date,' ',filename]),monitor='val_loss', mode='auto', save_best_only=True)
-x_train=x_train.reshape(-1,2,4)
-x_test=x_test.reshape(-1,2,4)
+x_train=x_train.reshape(-1,4,2)
+x_test=x_test.reshape(-1,4,2)
 model = Sequential()
-model.add(Conv1D(100,2, input_shape=(2,4)))
+model.add(Conv1D(100,1, input_shape=(4,2)))
+model.add(MaxPool1D())
 model.add(Flatten())
-# model.add(MaxPool1D())
 model.add(Dense(200))
 model.add(Dense(200))
 model.add(Dense(200))
@@ -200,7 +200,7 @@ model.summary()
 #3.컴파일 훈련
 
 model.compile(loss = 'mse', optimizer = 'adam')
-model.fit(x_train, y_train, epochs=2500, batch_size=200, verbose=1, validation_split=0.2, callbacks=[mcp])
+model.fit(x_train, y_train, epochs=2500, batch_size=200, verbose=1, validation_split=0.2)
 
 #4.평가 예측
 

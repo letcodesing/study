@@ -71,7 +71,7 @@ print(np.min(x_test))
 print(np.max(x_test))
 x_train=x_train.reshape(-1,2,2)
 x_test=x_test.reshape(-1,2,2)
-from tensorflow.python.keras.layers import Dense, Dropout, LSTM, Conv1D, MaxPool1D
+from tensorflow.python.keras.layers import Dense, Dropout, LSTM, Conv1D, MaxPool1D,Flatten
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.callbacks import EarlyStopping
 ES = EarlyStopping(monitor='val_loss', mode='min', patience=20, restore_best_weights=True)
@@ -86,6 +86,7 @@ model.add(Dense(100, activation='relu'))
 model.add(Dense(10, activation='sigmoid'))
 model.add(Dropout(0.2))
 model.add(Dense(10, activation='relu'))
+model.add(Flatten())
 model.add(Dense(3, activation='softmax'))
 model.summary()
 #3.컴파일 훈련
@@ -96,10 +97,10 @@ hist = model.fit(x_train, y_train, epochs=10, verbose=1,
 #4.평가 예측
 loss = model.evaluate(x_test, y_test)
 
-# y_predict = model.predict(x_test)
-# # y_predict = model.predict(x_test[:5])
-# print(y_test)
-# print(y_predict)
+y_predict = model.predict(x_test)
+# y_predict = model.predict(x_test[:5])
+print(y_test)
+print(y_predict)
 
 # [[0. 0. 1.]
 #  [0. 1. 0.]
@@ -113,10 +114,10 @@ loss = model.evaluate(x_test, y_test)
 #  [9.9765587e-01 2.1136946e-03 2.3034363e-04]]
 #제일 큰값만 1로 나머지 0
 # y_predict = np.argmax(y_predict, axis=3).reshape(-1)
-# y_predict = np.argmax(y_predict, axis= 1)
-# y_test = np.argmax(y_test, axis= 1)
+y_predict = np.argmax(y_predict, axis= 1)
+y_test = np.argmax(y_test, axis= 1)
 # print(y_test)
-# print(y_predict)
+print(y_predict)
 
 #predic값이 3개 출력됨 합은 1
 #test값도 3개 출력됨 둘다 (y,) 로 바꿔줌
@@ -194,3 +195,9 @@ print('acc', acc)
 # loss :  1.0712865591049194
 # acc : 0.35555556416511536
 # acc 0.35555555555555557
+
+
+# conv1d maxpool1d flatten
+# loss :  1.1090171337127686
+# acc : 0.2222222238779068
+# acc 0.2222222222222222
