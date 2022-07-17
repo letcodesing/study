@@ -3,23 +3,51 @@ import pandas as pd
 import numpy as np
 data = pd.read_csv('c:/study/_data/kaggle_jena/jena_climate_2009_2016.csv')
 print(data.shape) #(420551, 15) #하루 143행
-gen = data.to_numpy()
-print(gen)
 def split(seq, size): #함수 split_x는 한 
     aaa = []
-    for i in range(len(gen.loc[:]) -i*144):
-        subset = seq.loc[i*575:i*575+i+574]
+    for i in range(2900):
+        subset = seq.loc[i*size:(i*size)+575]
         aaa.append(subset)
     print(type(aaa))
     return np.array(aaa)
 
 
 # print(len(data.loc[:]))
-size = 419976
-gen2 = split(gen,size)
+size = 144
+gen2 = split(data,size)
 print(gen2.shape)
 print(gen2)
 
+gen = gen2.T
+
+
+print(gen.shape)
+gen = gen[1:]
+x = gen[:,:size*3]
+y = gen[:,size*3+1:size*4]
+x = np.asarray(x).astype('long')
+y = np.asarray(y).astype('double')
+print(x.shape, y.shape)
+print(x)
+
+# print(x)
+# print(x.shape)
+from keras.layers import Input, Dense, Conv1D, LSTM, Reshape, Flatten
+from keras.models import Model
+
+in1 = Input(shape=(432,2900))
+l1 = LSTM(29,return_sequences=True)(in1)
+c1 = Conv1D(2900, 290, name = 'c1')(l1)
+# r1 = Reshape((1,2900))(l1)
+# f1 = Flatten()(l1)
+# d1 = Dense(143)(f1)
+model = Model(inputs = in1, outputs = c1)
+model.summary()
+
+model.compile(loss = 'mse', optimizer='adam')
+model.fit(x,y, epochs=1, batch_size=100)
+loss = model.evaluate(x,y)
+print(loss)
 # print(data)
 # print(data.shape)
 # print(np.unique(data, return_counts=True))
@@ -70,4 +98,4 @@ print(gen2)
 # 		labels. append(dataset[i+target_size])
 # 	return np.array(data), np.array(labels)
 
-# data2 = uni_data(data,0,,10,1)
+# data2 = uni_data(data,0,,10,1)f
