@@ -78,41 +78,28 @@ amorex = amorex.reshape(1011, 20, 12)
 print(samx.shape, amorex.shape, samy.shape, amorey.shape)
 #3.모델구성
 from keras.models import Model
-from keras.layers import Input, LSTM, Dense, concatenate,Conv1D,Reshape,GRU
+from keras.layers import Input, LSTM, Dense, concatenate,Conv1D,Reshape
 
 in1 = Input(shape=(20,12))
 lstm1 = LSTM(3,name='l1')(in1)
-dens1 = Dense(10,name='d1')(lstm1)
-out1 = Dense(10,name='d13')(dens1)
+dens1 = Dense(100,name='d1')(lstm1)
+out1 = Dense(100,name='d13')(dens1)
 
 in2 = Input(shape=(20,12))
-lstm2 = GRU(3,name='l2')(in2)
-dens2 = Dense(10,name='d2')(lstm2)
-out2 = Dense(10,name='d23')(dens2)
+lstm2 = LSTM(3,name='l2')(in1)
+dens2 = Dense(100,name='d2')(lstm2)
+out2 = Dense(100,name='d23')(dens2)
 
 in3 = concatenate((out1,out2))
-dens3 = Dense(5)(in3)
-dens32 = Dense(80)(dens3)
-resha1 = Reshape((4,20))(dens32)
-out3 = Conv1D(2,2,name='d3')(resha1)
+resha1 = Reshape((4,50))(in3)
+dense1 = Conv1D(2,2,name='d3')(resha1)
 
-model = Model(inputs=[in1,in2], outputs = out3)
+model = Model(inputs=[in1,in2], outputs = dense1)
 model.summary()
 model.compile(loss = 'mse', optimizer='adam')
-hist = model.fit([samx,amorex],amorey, epochs=500, batch_size=100, validation_split=0.2)
+model.fit([samx,amorex],amorey, epochs=1000, batch_size=100)
 model.save_weights('c:/study/_data/test_amore_0718/ddserenade.h5')
 pred = model.predict([samx,amorex])
 # print(pred[-1:].shape)
 print('화요일 시가/종가', pred[-2:-1,:1])
 # print(pred[])
-
-import matplotlib.pyplot as plt
-plt.figure(figsize=(9,3))
-plt.plot(hist.history['loss'], marker='.', c='red', label='loss')
-plt.plot(hist.history['val_loss'], marker='.', c='blue', label='val_loss')
-plt.xlabel('xlabel')
-plt.ylabel('ylabel')
-plt.grid()
-plt.title('amore')
-plt.legend(loc ='lower center')
-plt.show()

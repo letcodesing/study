@@ -12,6 +12,12 @@ from keras.layers import Dense, LSTM
 
  
 a = np.array(range(1,11))
+a = a.T
+a.sort(reverse=True)
+print(a)
+
+
+""" 
 print(len(a))
 print(a)
 # a는 np array 타입으로 1부터 11-1까지다 즉 [ 1  2  3  4  5  6  7  8  9 10]
@@ -71,4 +77,4 @@ x_input = np.array([7,8,9,10]) # (4,)
 x_input = x_input.reshape(1,4)
  
 yhat = model.predict(x_input)
-print(yhat)
+print(yhat) """
