@@ -32,7 +32,7 @@ print(sam)
 print(amorey.isnull().sum())
 def split_x(seq, size): #함수 split_x는 한 
     aaa = []
-    for i in range(len(seq) - 23):
+    for i in range(len(seq) - 24):
         subset = seq[i:(i+size)]
         aaa.append(subset)
     print(type(aaa))
@@ -52,24 +52,27 @@ def split_y(seq, size): #함수 split_x는 한
     return np.array(aaa)
 samy = split_y(samy,size)
 amorey = split_y(amorey,size)
+print(amorex.shape)
+print(amorey.shape)
+
 from sklearn.preprocessing import MinMaxScaler, MaxAbsScaler
 scaler = MinMaxScaler()
 # scaler = MaxAbsScaler()
 
-samx = samx.reshape(20220,12)
+samx = samx.reshape(20200,12)
 samx = scaler.fit_transform(samx)
 # x1_test = x1_test.reshape(204*20,7)
 # x1_test = scaler.transform(x1_test)
 
-amorex = amorex.reshape(20220,12)
+amorex = amorex.reshape(20200,12)
 amorex = scaler.fit_transform(amorex)
 # x2_test = x2_test.reshape(204*20,7)
 # x2_test = scaler.transform(x2_test)
 
 # Conv1D에 넣기 위해 3차원화
-samx = samx.reshape(1011, 20, 12)
+samx = samx.reshape(1010, 20, 12)
 # x1_test = x1_test.reshape(204, 20, 7)
-amorex = amorex.reshape(1011, 20, 12)
+amorex = amorex.reshape(1010, 20, 12)
 # x2_test = x2_test.reshape(204, 20, 7)
 # samx = samx[1:953]
 # samy = samy[1:953]
@@ -98,21 +101,23 @@ out3 = Conv1D(2,2,name='d3')(resha1)
 
 model = Model(inputs=[in1,in2], outputs = out3)
 model.summary()
+# hist = model.load_weights('c:/study/_test/ddserenade.h5')
+
 model.compile(loss = 'mse', optimizer='adam')
-hist = model.fit([samx,amorex],amorey, epochs=500, batch_size=100, validation_split=0.2)
-model.save_weights('c:/study/_data/test_amore_0718/ddserenade.h5')
+hist = model.fit([samx,amorex],amorey, epochs=3, batch_size=1000000000000009000000000000000, validation_split=0.2)
+model.save_weights('c:/study/_test/ddserenade.h5')
 pred = model.predict([samx,amorex])
-# print(pred[-1:].shape)
-print('화요일 시가/종가', pred[-2:-1,:1])
+print(pred.shape)
+print('수요일 종가', pred[1009:1010,2:3,1:2])
 # print(pred[])
 
-import matplotlib.pyplot as plt
-plt.figure(figsize=(9,3))
-plt.plot(hist.history['loss'], marker='.', c='red', label='loss')
-plt.plot(hist.history['val_loss'], marker='.', c='blue', label='val_loss')
-plt.xlabel('xlabel')
-plt.ylabel('ylabel')
-plt.grid()
-plt.title('amore')
-plt.legend(loc ='lower center')
-plt.show()
+# import matplotlib.pyplot as plt
+# plt.figure(figsize=(9,3))
+# plt.plot(hist.history['loss'], marker='.', c='red', label='loss')
+# plt.plot(hist.history['val_loss'], marker='.', c='blue', label='val_loss')
+# plt.xlabel('xlabel')
+# plt.ylabel('ylabel')
+# plt.grid()
+# plt.title('amore')
+# plt.legend(loc ='lower center')
+# plt.show()

@@ -52,8 +52,9 @@ def split_y(seq, size): #함수 split_x는 한
     return np.array(aaa)
 samy = split_y(samy,size)
 amorey = split_y(amorey,size)
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, MaxAbsScaler
 scaler = MinMaxScaler()
+# scaler = MaxAbsScaler()
 
 samx = samx.reshape(20220,12)
 samx = scaler.fit_transform(samx)
@@ -76,28 +77,33 @@ amorex = amorex.reshape(1011, 20, 12)
 # amorey = amorey[1:953]
 print(samx.shape, amorex.shape, samy.shape, amorey.shape)
 #3.모델구성
-from keras.models import Model,load_model
-from keras.layers import Input, LSTM, Dense, concatenate,Conv1D,Reshape
+from keras.models import Model
+from keras.layers import Input, LSTM, Dense, concatenate,Conv1D,Reshape,GRU
 
 in1 = Input(shape=(20,12))
 lstm1 = LSTM(3,name='l1')(in1)
-out1 = Dense(100,name='d1')(lstm1)
+dens1 = Dense(10,name='d1')(lstm1)
+out1 = Dense(10,name='d13')(dens1)
 
 in2 = Input(shape=(20,12))
-lstm2 = LSTM(3,name='l2')(in1)
-out2 = Dense(100,name='d2')(lstm2)
+lstm2 = GRU(3,name='l2')(in2)
+dens2 = Dense(10,name='d2')(lstm2)
+out2 = Dense(10,name='d23')(dens2)
 
 in3 = concatenate((out1,out2))
-resha1 = Reshape((4,50))(in3)
-dense1 = Conv1D(2,2,name='d3')(resha1)
+dens3 = Dense(5)(in3)
+dens32 = Dense(80)(dens3)
+resha1 = Reshape((4,20))(dens32)
+out3 = Conv1D(2,2,name='d3')(resha1)
 
-model = Model(inputs=[in1,in2], outputs = dense1)
+model = Model(inputs=[in1,in2], outputs = out3)
 model.summary()
-model.load_weights('c:/study/_data/test_amore_0718/ddserenade.h5')
+# hist = model.load_weights('c:/study/_test/ddserenade.h5')
+
 model.compile(loss = 'mse', optimizer='adam')
-# model.fit([samx,amorex],amorey, epochs=1, batch_size=100)
-# model.save_weights('c:/study/_data/test_amore_0718/ddserenade.h5')
+hist = model.fit([samx,amorex],amorey, epochs=300, batch_size=100, validation_split=0.2)
+model.save_weights('c:/study/_test/ddserenade.h5')
 pred = model.predict([samx,amorex])
-print(pred[-1:].shape)
-print(amorey[-2:-1,:1])
+print(pred.shape)
+print('수요일 종가', pred[1010:1011,2:3,1:2])
 # print(pred[])
