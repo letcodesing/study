@@ -103,6 +103,11 @@ model = Model(inputs=[in1,in2], outputs = out3)
 model.summary()
 # hist = model.load_weights('c:/study/_test/ddserenade.h5')
 
+row = ([[2022/07/13], [2022/07/14], [2022/07/15],[2022/07/16],[2022/07/17],[2022/07/18],[2022/07/19],[2022/07/20]])
+samx = np.vstack([samx,row])
+
+
+
 model.compile(loss = 'mse', optimizer='adam')
 hist = model.fit([samx,amorex],amorey, epochs=150, batch_size=100, validation_split=0.2)
 model.save_weights('c:/study/_test/ddserenade.h5')

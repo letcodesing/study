@@ -38,8 +38,8 @@ print(dataset_amo.head) # 앞 다섯개만 보기
 dataset_sam = np.array(dataset_sam)
 dataset_amo = np.array(dataset_amo)
 
-print(dataset_sam)
-print(dataset_amo)
+print(dataset_sam.shape)
+print(dataset_amo.shape)
 
 
 
@@ -48,8 +48,8 @@ def split_xy(dataset, time_steps, y_column):
     x = []
     y = []
     for i in range(len(dataset)):
-        x_end_number = i + time_steps
-        y_end_number = x_end_number + y_column - 1
+        x_end_number = i + time_steps #i=0 5
+        y_end_number = x_end_number + y_column - 1 #i=0 8
         
         if y_end_number < len(dataset):
             break
@@ -63,7 +63,7 @@ time_steps = 5
 y_column = 3
 
 x1, y1 = split_xy(dataset_amo, time_steps, y_column)
-
+print(len(dataset_sam))
 print(x1.shape)
 print(y1.shape)
 
