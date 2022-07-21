@@ -18,8 +18,8 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.75, shuff
 
 #2. 모델구성
 model = Sequential()
-model.add(Conv2D(64, (2, 2), input_shape=(150, 150, 3), activation='relu'))
-model.add(Conv2D(32, (2, 2), activation='relu'))
+model.add(Conv2D(6, (2, 2), input_shape=(150, 150, 3), activation='relu'))
+model.add(Conv2D(4, (2, 2), activation='relu'))
 model.add(Flatten())
 model.add(Dense(100, activation='relu'))
 model.add(Dense(100, activation='relu'))
@@ -48,5 +48,5 @@ acc = accuracy_score(y_test, y_predict)
 print('loss : ', loss)
 print('acc : ', acc)
 
-# loss :  0.2564626634120941
-# acc :  0.9857142857142858
+# loss :  0.2772544026374817
+# acc :  0.9222222222222223

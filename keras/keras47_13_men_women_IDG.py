@@ -22,4 +22,4 @@ np.save('D:\study_data\_save\_npy\keras47_mwtrain_y',arr = train[0][1])
 np.save('D:\study_data\_save\_npy\keras47_mwtest_x',arr = train[0][0])
 np.save('D:\study_data\_save\_npy\keras47_mwtest_y.npy',arr = train[0][1])
 
-prind('move your ass')
+print('move your ass')
