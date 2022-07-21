@@ -1,0 +1,10 @@
+TypeError: object of type 'int' has no len()
+flow().next 배우는 과정에서ㅕ 매개변수 x 자리에 .shape을 추가함
+/
+SyntaxError: (unicode error) 'unicodeescape' codec can't decode bytes in position 2-3: truncated \UX
+1. 백슬래시(\)를 써야하는 곳에 슬래시(/)를 사용한 경우
+
+2. 백슬래시(\)가 2번 사용되어야 하는 곳에 백슬래시가 한번 사용된 경우
+
+/복사방지 해제 f12-)디버거 자바스크립트 중지
+/

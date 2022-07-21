@@ -29,16 +29,39 @@ print(np.zeros(argument_size))
 # print(np.zeros(argument_size).shape)
 x_data = train_datagen.flow(np.tile(x_train[0].reshape(28*28), argument_size).reshape(-1,28,28,1), np.zeros(argument_size),
                             batch_size=argument_size,
-                            shuffle=True,).next()
+                            shuffle=True,)
+# next()사용
+# print(x_data)
+# print(x_data[0])
+# print(x_data[0][0].shape) 
+# print(x_data[0][1].shape)
+#    [0.00000000e+00]
+#    [0.00000000e+00]]]]
+# (28, 28, 1)
+# (28, 28, 1)
+
 print(x_data)
 print(x_data[0])
 print(x_data[0][0].shape) 
 print(x_data[0][1].shape)
+#      [0.00000000e+00],
+#          [0.00000000e+00]]]], dtype=float32), array([0., 0., 0., 0., 0., 0., 
+# 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+#        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,   
+#        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,   
+#        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,   
+#        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,   
+#        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]))
+# (100, 28, 28, 1)
+# (100,)
+
+
 
 import matplotlib.pyplot as plt
 plt.figure(figsize=(7,7))
 for i in range(49):
     plt.subplot(7,7,i+1)
     plt.axis('off')
-    plt.imshow(x_data[0][i], cmap='gray')
+    # plt.imshow(x_data[0][i], cmap='gray')
+    plt.imshow(x_data[0][0][i], cmap='gray') #next 사용
 plt.show()
