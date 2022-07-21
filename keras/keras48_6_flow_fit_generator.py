@@ -45,39 +45,8 @@ print(x_argumented.shape)
 x_train = np.concatenate((x_train, x_argumented))
 y_train = np.concatenate((y_train, y_argumented))
 # t= x_train[randidx+60000]
-print(x_train[randidx][28:28, :1])
-print(x_train[randidx][:-1, :-1])
-print(x_train[randidx][:-1, :-1])
-print(x_train[randidx][:-1, :-1])
-print(x_train[randidx][:-1, :-1])
-print(y_train.shape)
-i = x_train[randidx][:-1, :-1]
-import matplotlib.pyplot as plt
-train_images = x_train[randidx][0][0:10]
-print(train_images)
-plt.figure(figsize=(10,10))
-for i in range(25):
-    plt.subplot(5,5,i+1)
-    plt.xticks([])
-    plt.yticks([])
-    plt.grid(False)
-    plt.imshow(train_images[i], cmap=plt.cm.binary)
-    plt.xlabel(class_names[train_labels[i]])
-    
-    
-plt.figure(figsize=(2,10))
-for i in range(20):
-    if i <= 9:
-        plt.subplot(2, 10, i+1)
-        plt.axis('off')
-        plt.imshow(np.min(randidx)[i], cmap='gray')
-    else:
-        plt.subplot(2, 10, i+1)
-        plt.axis('off')
-        plt.imshow(np.min(randidx)[i+60000], cmap='gray')
 
-plt.show() 
-""" 
+
 print(x_train[0].shape) #28,28
 print(x_train[0].reshape(28*28).shape) #784,
 print(np.tile(x_train[0].reshape(28*28), argument_size).reshape(-1,28,28,1).shape) #100,28,28,1
@@ -113,15 +82,6 @@ print(x_data[0][1].shape)
 
 
 
-import matplotlib.pyplot as plt
-plt.figure(figsize=(7,7))
-for i in range(49):
-    plt.subplot(7,7,i+1)
-    plt.axis('off')
-    # plt.imshow(x_data[0][i], cmap='gray')
-    plt.imshow(x_data[0][0][i], cmap='gray') #next 사용
-plt.show() """
-""" 
 from keras.models import Model, Input
 from keras.layers import Dense, Conv2D, Flatten
 
@@ -140,7 +100,7 @@ pred = model.predict(x_test)
 print(np.unique(y_test))
 print(pred)
 print(y_test.shape, pred.shape)
- """
+
 
 print(x_train[randidx])
 import matplotlib.pyplot as plt
