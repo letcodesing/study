@@ -32,8 +32,9 @@ y_argumented = y_train[randidx].copy()
 print(x_argumented.shape)
 print(y_argumented.shape)
 x_train = x_train.reshape(60000, 28,28,1)
+print(x_test.shape)
 x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], x_test.shape[2],1)
-
+print
 x_argumented = x_argumented.reshape(x_argumented.shape[0], x_argumented.shape[1], x_argumented.shape[2],1)
 
 x_argumented = train_datagen.flow(x_argumented, y_argumented,

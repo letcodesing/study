@@ -1,0 +1,3 @@
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+
+va;idation 오류 데이터셋에 y가 빠졌거나 리스트 혹은 튜플로 감싸주거나 발리를 빼거나
