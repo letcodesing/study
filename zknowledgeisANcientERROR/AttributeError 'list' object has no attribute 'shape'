@@ -1,0 +1,12 @@
+AttributeError: 'list' object has no attribute 'shape'
+
+원핫 인코더 적용전 shape을 찍어볼때 발생
+sklearn 원핫은 2차원만 받으므로 np.array로 미리 적용 
+sparse=False는 원핫인코더를 불러올때나 재정의할때 써서 적용해야한다
+import numpy as np
+ohe = OneHotEncoder(sparse=False)
+x_new = np.array(x_new)
+# x_new = np.array(sparse=False)
+print(x_new.shape)
+x_new = ohe.fit_transform(x_new.reshape(22,1))
+print(x_new)

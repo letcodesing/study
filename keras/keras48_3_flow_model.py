@@ -72,8 +72,6 @@ plt.show()
 # plt.imshow(x_train[p+60000])
 # plt.show() 
 
-
-""" 
 print(x_train[0].shape) #28,28
 print(x_train[0].reshape(28*28).shape) #784,
 print(np.tile(x_train[0].reshape(28*28), argument_size).reshape(-1,28,28,1).shape) #100,28,28,1
@@ -116,8 +114,8 @@ for i in range(49):
     plt.axis('off')
     # plt.imshow(x_data[0][i], cmap='gray')
     plt.imshow(x_data[0][0][i], cmap='gray') #next 사용
-plt.show() """
-""" 
+plt.show() 
+
 from keras.models import Model, Input
 from keras.layers import Dense, Conv2D, Flatten
 
@@ -136,8 +134,7 @@ pred = model.predict(x_test)
 print(np.unique(y_test))
 print(pred)
 print(y_test.shape, pred.shape)
- """
-
+ 
 # print(x_train[randidx])
 # import matplotlib.pyplot as plt
 # plt.figure(figsize=(2,10))

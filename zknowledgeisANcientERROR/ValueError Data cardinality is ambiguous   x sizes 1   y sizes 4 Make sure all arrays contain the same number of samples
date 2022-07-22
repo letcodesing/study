@@ -1,0 +1,8 @@
+ValueError: Data cardinality is ambiguous:
+  x sizes: 1
+  y sizes: 4
+Make sure all arrays contain the same number of samples.
+
+x와 y의 타입 와꾸문제 x행에 맞는 y의 데이터가 없다는 말
+
+다소 이해하기 어려운 것은 reshape해서 꼭와꾸는 맞추고 inputshape을 똑같이 해주는건데 y값의 칼럼갯수에 따라 오류가 나고 안나고함

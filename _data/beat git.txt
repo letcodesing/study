@@ -14,11 +14,7 @@
 
 이재근 https://github.com/Euuuuu11/study
 
-방제현 https://github.com/jehyunB/Study 
-
 김새봄 https://github.com/saebom/study 
-
-최은영 https://github.com/eunyeong73/study.git
 
 김수민 https://github.com/letcodesing/study
 
@@ -32,11 +28,9 @@
 
 황도형 https://github.com/hwangdohyung/study
 
-김재훈 https://github.com/asdf01128/study.
-
 전민기 https://github.com/alsrlwjs56/study
 
-김지수 https://github.com/JS0909/.study.git  
+김지수 https://github.com/JS0909/
 
  
 

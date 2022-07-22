@@ -1,0 +1,4 @@
+  p = pred + docs
+TypeError: can only concatenate str (not "list") to str
+
+리스트형태로 된 임의의 데이터를 합칠때 하나의 데이터에 [] 를 씌어주지 않음

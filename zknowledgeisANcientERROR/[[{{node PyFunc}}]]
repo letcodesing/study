@@ -1,0 +1,13 @@
+# I solve this problem (in tensorflow 2.5)
+
+# I suppose a file named 'train.py' to run (this is an example)
+
+# When run .py files in terminal
+
+# $ CUDA_VISIBLE_DEVICES=0 python train.py  # Use GPU 0.
+# $ CUDA_VISIBLE_DEVICES=1 python train.py  # Use GPU 1.
+# $ CUDA_VISIBLE_DEVICES=2,3 python train.py  # Use GPUs 2 and 3.
+# Add 3 lines in train.py file
+# import os
+# os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   
+# os.environ["CUDA_VISIBLE_DEVICES"]="0"
