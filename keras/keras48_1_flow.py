@@ -21,8 +21,9 @@ train_datagen = ImageDataGenerator(
 
 
 argument_size = 100
-
+print(x_train[0])
 print(x_train[0].shape) #28,28
+
 print(x_train[0].reshape(28*28).shape) #784,
 print(np.tile(x_train[0].reshape(28*28), argument_size).reshape(-1,28,28,1).shape) #100,28,28,1
 print(np.zeros(argument_size))
@@ -59,7 +60,7 @@ print(x_data[0][1].shape)
 
 import matplotlib.pyplot as plt
 plt.figure(figsize=(7,7))
-for i in range(49):
+for i in range(49):                                                    
     plt.subplot(7,7,i+1)
     plt.axis('off')
     # plt.imshow(x_data[0][i], cmap='gray')

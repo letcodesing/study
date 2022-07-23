@@ -13,10 +13,10 @@ from sklearn.metrics import r2_score, accuracy_score
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler, RobustScaler
 from keras.layers import BatchNormalization
 from keras.preprocessing.image import ImageDataGenerator
-x_train = np.load('d:/study_data/_save/_npy/brain/keras49_05_train_x.npy')
-y_train = np.load('d:/study_data/_save/_npy/brain/keras49_05_train_y.npy')
-x_test = np.load('d:/study_data/_save/_npy/brain/keras49_05_test_x.npy')
-y_test = np.load('d:/study_data/_save/_npy/brain/keras49_05_test_y.npy')
+x_train = np.load('c:/study_data/_save/keras49_05_train_x.npy')
+y_train = np.load('c:/study_data/_save/keras49_05_train_y.npy')
+x_test = np.load('c:/study_data/_save/keras49_05_test_x.npy')
+y_test = np.load('c:/study_data/_save/keras49_05_test_y.npy')
 
  # 2. 모델
 from tensorflow.python.keras.models import Sequential
@@ -53,7 +53,7 @@ model = Model(inputs=input1, outputs=output1)
 # 3. 컴파일, 훈련
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 es = EarlyStopping(monitor='val_loss',patience=20,restore_best_weights=True,mode = 'auto',verbose=1)
-hist = model.fit(x_train,y_train, epochs= 1, validation_split=0.1, verbose=1,callbacks=es)
+hist = model.fit(x_train,y_train, epochs= 1, batch_size=23,validation_split=0.1, verbose=1,callbacks=es)
 
 # 4. 평가, 예측
 loss = hist.history['loss']
