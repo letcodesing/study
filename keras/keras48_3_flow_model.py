@@ -107,6 +107,7 @@ print(x_data[0][1].shape)
 
 
 
+
 import matplotlib.pyplot as plt
 plt.figure(figsize=(7,7))
 for i in range(49):

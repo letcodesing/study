@@ -37,9 +37,9 @@ x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], x_test.shape[2],1)
 x_argumented = x_argumented.reshape(x_argumented.shape[0], x_argumented.shape[1], x_argumented.shape[2],1)
 import time
 start_time = time.time()
-x_argumented = train_datagen.flow(x_argumented, y_argumented,
+train_datagen.flow(x_argumented, y_argumented,
                                   batch_size=argument_size,
-                                  save_to_dir="d:/study_data/_temp/",
+                                  save_to_dir="c:/study_data/_temp/",
                                   shuffle=False,).next()[0]
 end_time = time.time()-start_time
 print(round(end_time, 3), '초')

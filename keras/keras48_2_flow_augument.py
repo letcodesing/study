@@ -23,7 +23,7 @@ train_datagen = ImageDataGenerator(
 argument_size = 40000
 print(x_train.shape[0])
 
-randidx = np.random.randint(x_train.shape[0], size = argument_size)
+randidx = np.reandom.randint(x_train.shape[0], size = argument_size)
 
 print(np.min(randidx), np.max(randidx))
 print(type(randidx))
