@@ -82,7 +82,7 @@ for i in range(20):
     else: 
         plt.subplot(2,10,i+1)
         plt.axis('off')
-        plt.imshow(x_train[randix[i-9]], cmap='gray')   
+        plt.imshow(x_train[randix[i-10]], cmap='gray')   
 plt.show()
 
  

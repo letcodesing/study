@@ -1,3 +1,4 @@
+from ssl import ALERT_DESCRIPTION_BAD_CERTIFICATE_STATUS_RESPONSE
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -12,3 +13,6 @@ y = np.array([11,12,13,14,15,16,17,18,19,20])
 print(x.shape, y.shape)
 x = np.transpose(x)
 print(x.shape)
+
+ALERT_DESCRIPTION_BAD_CERTIFICATE_
+`STATUS_RESPONSE
