@@ -1,0 +1,4 @@
+TypeError: Could not interpret activation function identifier: 1
+
+Your activation parameter is empty.
+
