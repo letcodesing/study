@@ -52,6 +52,9 @@ def split_y(seq, size): #함수 split_x는 한
     return np.array(aaa)
 samy = split_y(samy,size)
 amorey = split_y(amorey,size)
+
+print(amorex)
+print(amorey)
 print(amorex.shape)
 print(amorey.shape)
 
@@ -104,7 +107,7 @@ model.summary()
 # hist = model.load_weights('c:/study/_test/ddserenade.h5')
 
 model.compile(loss = 'mse', optimizer='adam')
-hist = model.fit([samx,amorex],amorey, epochs=3, batch_size=1000000000000009000000000000000, validation_split=0.2)
+hist = model.fit([samx,amorex],amorey, epochs=3, batch_size=10000000000, validation_split=0.2)
 model.save_weights('c:/study/_test/ddserenade.h5')
 pred = model.predict([samx,amorex])
 print(pred.shape)
