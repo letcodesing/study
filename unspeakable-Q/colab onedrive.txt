@@ -1,0 +1,277 @@
+!curl https://rclone.org/install.sh | sudo bash
+
+$ rclone authorize "onedrive" = cmd 해당 폴더 이동 ./rclone.exe authorize 'onedrive' -사인인 허용
+
+!rclone config
+
+2022/07/29 06:46:12 NOTICE: Config file "/root/.config/rclone/rclone.conf" not found - using defaults
+No remotes found, make a new one?
+n) New remote
+s) Set configuration password
+q) Quit config
+n/s/q> onedrive
+This value must be a single character, one of the following: n, s, q.
+n/s/q> n
+
+Enter name for new remote.
+name> onedrive
+
+Option Storage.
+Type of storage to configure.
+Choose a number from below, or type in your own value.
+ 1 / 1Fichier
+   \ (fichier)
+ 2 / Akamai NetStorage
+   \ (netstorage)
+ 3 / Alias for an existing remote
+   \ (alias)
+ 4 / Amazon Drive
+   \ (amazon cloud drive)
+ 5 / Amazon S3 Compliant Storage Providers including AWS, Alibaba, Ceph, China Mobile, Cloudflare, ArvanCloud, Digital Ocean, Dreamhost, Huawei OBS, IBM COS, IDrive e2, Lyve Cloud, Minio, Netease, RackCorp, Scaleway, SeaweedFS, StackPath, Storj, Tencent COS and Wasabi
+   \ (s3)
+ 6 / Backblaze B2
+   \ (b2)
+ 7 / Better checksums for other remotes
+   \ (hasher)
+ 8 / Box
+   \ (box)
+ 9 / Cache a remote
+   \ (cache)
+10 / Citrix Sharefile
+   \ (sharefile)
+11 / Combine several remotes into one
+   \ (combine)
+12 / Compress a remote
+   \ (compress)
+13 / Dropbox
+   \ (dropbox)
+14 / Encrypt/Decrypt a remote
+   \ (crypt)
+15 / Enterprise File Fabric
+   \ (filefabric)
+16 / FTP
+   \ (ftp)
+17 / Google Cloud Storage (this is not Google Drive)
+   \ (google cloud storage)
+18 / Google Drive
+   \ (drive)
+19 / Google Photos
+   \ (google photos)
+20 / HTTP
+   \ (http)
+21 / Hadoop distributed file system
+   \ (hdfs)
+22 / HiDrive
+   \ (hidrive)
+23 / Hubic
+   \ (hubic)
+24 / In memory object storage system.
+   \ (memory)
+25 / Internet Archive
+   \ (internetarchive)
+26 / Jottacloud
+   \ (jottacloud)
+27 / Koofr, Digi Storage and other Koofr-compatible storage providers
+   \ (koofr)
+28 / Local Disk
+   \ (local)
+29 / Mail.ru Cloud
+   \ (mailru)
+30 / Mega
+   \ (mega)
+31 / Microsoft Azure Blob Storage
+   \ (azureblob)
+32 / Microsoft OneDrive
+   \ (onedrive)
+33 / OpenDrive
+   \ (opendrive)
+34 / OpenStack Swift (Rackspace Cloud Files, Memset Memstore, OVH)
+   \ (swift)
+35 / Pcloud
+   \ (pcloud)
+36 / Put.io
+   \ (putio)
+37 / QingCloud Object Storage
+   \ (qingstor)
+38 / SSH/SFTP
+   \ (sftp)
+39 / Sia Decentralized Cloud
+   \ (sia)
+40 / Storj Decentralized Cloud Storage
+   \ (storj)
+41 / Sugarsync
+   \ (sugarsync)
+42 / Transparently chunk/split large files
+   \ (chunker)
+43 / Union merges the contents of several upstream fs
+   \ (union)
+44 / Uptobox
+   \ (uptobox)
+45 / WebDAV
+   \ (webdav)
+46 / Yandex Disk
+   \ (yandex)
+47 / Zoho
+   \ (zoho)
+48 / premiumize.me
+   \ (premiumizeme)
+49 / seafile
+   \ (seafile)
+Storage> 32
+
+Option client_id.
+OAuth Client Id.
+Leave blank normally.
+Enter a value. Press Enter to leave empty.
+client_id> aurelstein@knou.ac.kr
+
+Option client_secret.
+OAuth Client Secret.
+Leave blank normally.
+Enter a value. Press Enter to leave empty.
+client_secret> dlrmffn2#
+
+Option region.
+Choose national cloud region for OneDrive.
+Choose a number from below, or type in your own string value.
+Press Enter for the default (global).
+ 1 / Microsoft Cloud Global
+   \ (global)
+ 2 / Microsoft Cloud for US Government
+   \ (us)
+ 3 / Microsoft Cloud Germany
+   \ (de)
+ 4 / Azure and Office 365 operated by 21Vianet in China
+   \ (cn)
+region> 1
+
+Edit advanced config?
+y) Yes
+n) No (default)
+y/n> n
+
+Use auto config?
+ * Say Y if not sure
+ * Say N if you are working on a remote or headless machine
+
+y) Yes (default)
+n) No
+y/n> n
+
+Option config_token.
+For this to work, you will need rclone available on a machine that has
+a web browser available.
+For more help and alternate methods see: https://rclone.org/remote_setup/
+Execute the following on the machine with the web browser (same rclone
+version recommended):
+	rclone authorize "onedrive" "eyJjbGllbnRfaWQiOiJhdXJlbHN0ZWluQGtub3UuYWMua3IiLCJjbGllbnRfc2VjcmV0IjoiZGxybWZmbjIjIn0"
+Then paste the result.
+Enter a value.
+config_token> eyJ0eXAiOiJKV1QiLCJub25jZSI6InVQaTRsNjVwZDlMcE54UXdDaFo3RUUzeTZoUGkteDlQb1llZ2tIY3d4YnciLCJhbGciOiJSUzI1NiIsIng1dCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSIsImtpZCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC83NTVlNTg3Yi1lMDk4LTRiYzktOWI4OS1lYWNmNjM2MTk3MDMvIiwiaWF0IjoxNjU5MDc2NzMwLCJuYmYiOjE2NTkwNzY3MzAsImV4cCI6MTY1OTA4MTM1MiwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyWmdZTGhXNER0cHIrTFJSOTh0b21MUE40bEpXNTdVS3BqbXhsNno5Y1djaXovOWFtd0IiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6InJjbG9uZSIsImFwcGlkIjoiYjE1NjY1ZDktZWRhNi00MDkyLTg1MzktMGVlYzM3NmFmZDU5IiwiYXBwaWRhY3IiOiIxIiwiZmFtaWx5X25hbWUiOiLquYAiLCJnaXZlbl9uYW1lIjoi7IiY66-8IiwiaWR0eXAiOiJ1c2VyIiwiaXBhZGRyIjoiMTA2LjI0MS4yNTIuNTEiLCJuYW1lIjoi6rmA7IiY66-8Iiwib2lkIjoiZWI4MTcyY2MtZTNhMi00YTczLTkyZWQtZTUxZjFiMmE5Zjc1IiwicGxhdGYiOiIzIiwicHVpZCI6IjEwMDMwMDAwOUY2RkJEMTMiLCJyaCI6IjAuQVZNQWUxaGVkWmpneVV1YmllclBZMkdYQXdNQUFBQUFBQUFBd0FBQUFBQUFBQUJUQUhzLiIsInNjcCI6IkZpbGVzLlJlYWQgRmlsZXMuUmVhZC5BbGwgRmlsZXMuUmVhZFdyaXRlIEZpbGVzLlJlYWRXcml0ZS5BbGwgU2l0ZXMuUmVhZC5BbGwgcHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzdWIiOiI1N3JrTF95T1A4M2JFbjZSWmFfNVdRNm1fdHc3SmVITm5NcjFwZUZrdWprIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkFTIiwidGlkIjoiNzU1ZTU4N2ItZTA5OC00YmM5LTliODktZWFjZjYzNjE5NzAzIiwidW5pcXVlX25hbWUiOiJhdXJlbHN0ZWluQGtub3UuYWMua3IiLCJ1cG4iOiJhdXJlbHN0ZWluQGtub3UuYWMua3IiLCJ1dGkiOiJNYklmTEx2Q04wVzhwUDNlNlNreUFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX3N0Ijp7InN1YiI6InBFLUNLQ252ckVSN28zR1lyYlJpcmx6R2MtYXB3dElkNVRlREh2WWtTb1EifSwieG1zX3RjZHQiOjE0NDM0MTI0MDB9.vjsYcr03YG6A1EpyoaZBS-ZGjx7knaScmxjb_vUBVS4rpQ6KO3uei7NKaMKKeORT4wYAYDbVAYtEPdU4fGfQif38RnOMK7SBaDeXDdF8n56DCQ7wD7KbN0A2-VWperSca_GQF28k9CGpbVz8R9fiYiTbFVh3Ulkxn9fol9dUN2Ivwzf91MAQ6AZVkXVM8RTAH1f2NeZjZo4bNtA0Tm9anYdIWzII_xg8AnNzqnc61Izomqk2Z0M1q6e7W9dA8PyxqJRtKP48EQnKNaoQexjHEhGJpf7zl1QfafNdEqFmhp3nJzWRwDfDjlzUkcdXMb2JgxiM7KPLN2BigDPySSD0yQ
+
+Couldn't decode response - try again (make sure you are using a matching version of rclone on both sides: invalid character 'e' looking for beginning of value
+
+
+Error: failed to configure OneDrive: empty token found - please run "rclone config reconnect onedrive:"
+Usage:
+  rclone config [flags]
+  rclone config [command]
+
+Available Commands:
+  create      Create a new remote with name, type and options.
+  delete      Delete an existing remote.
+  disconnect  Disconnects user from remote
+  dump        Dump the config file as JSON.
+  file        Show path of configuration file in use.
+  password    Update password in an existing remote.
+  paths       Show paths used for configuration, cache, temp etc.
+  providers   List in JSON format all the providers and options.
+  reconnect   Re-authenticates user with remote.
+  show        Print (decrypted) config file, or the config for a single remote.
+  touch       Ensure configuration file exists.
+  update      Update options in an existing remote.
+  userinfo    Prints info about logged in user of remote.
+
+Flags:
+  -h, --help   help for config
+
+Additional help topics:
+  rclone config edit       Enter an interactive configuration session.
+
+Use "rclone [command] --help" for more information about a command.
+Use "rclone help flags" for to see the global flags.
+Use "rclone help backends" for a list of supported services.
+
+2022/07/29 06:49:16 Fatal error: failed to configure OneDr
+
+
+
+Paste the following into your remote machine --->
+{"access_token":"eyJ0eXAiOiJKV1QiLCJub25jZSI6InVQaTRsNjVwZDlMcE54UXdDaFo3RUUzeTZoUGkteDlQb1llZ2tIY3d4YnciLCJhbGciOiJSUzI1NiIsIng1dCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSIsImtpZCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC83NTVlNTg3Yi1lMDk4LTRiYzktOWI4OS1lYWNmNjM2MTk3MDMvIiwiaWF0IjoxNjU5MDc2NzMwLCJuYmYiOjE2NTkwNzY3MzAsImV4cCI6MTY1OTA4MTM1MiwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyWmdZTGhXNER0cHIrTFJSOTh0b21MUE40bEpXNTdVS3BqbXhsNno5Y1djaXovOWFtd0IiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6InJjbG9uZSIsImFwcGlkIjoiYjE1NjY1ZDktZWRhNi00MDkyLTg1MzktMGVlYzM3NmFmZDU5IiwiYXBwaWRhY3IiOiIxIiwiZmFtaWx5X25hbWUiOiLquYAiLCJnaXZlbl9uYW1lIjoi7IiY66-8IiwiaWR0eXAiOiJ1c2VyIiwiaXBhZGRyIjoiMTA2LjI0MS4yNTIuNTEiLCJuYW1lIjoi6rmA7IiY66-8Iiwib2lkIjoiZWI4MTcyY2MtZTNhMi00YTczLTkyZWQtZTUxZjFiMmE5Zjc1IiwicGxhdGYiOiIzIiwicHVpZCI6IjEwMDMwMDAwOUY2RkJEMTMiLCJyaCI6IjAuQVZNQWUxaGVkWmpneVV1YmllclBZMkdYQXdNQUFBQUFBQUFBd0FBQUFBQUFBQUJUQUhzLiIsInNjcCI6IkZpbGVzLlJlYWQgRmlsZXMuUmVhZC5BbGwgRmlsZXMuUmVhZFdyaXRlIEZpbGVzLlJlYWRXcml0ZS5BbGwgU2l0ZXMuUmVhZC5BbGwgcHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzdWIiOiI1N3JrTF95T1A4M2JFbjZSWmFfNVdRNm1fdHc3SmVITm5NcjFwZUZrdWprIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkFTIiwidGlkIjoiNzU1ZTU4N2ItZTA5OC00YmM5LTliODktZWFjZjYzNjE5NzAzIiwidW5pcXVlX25hbWUiOiJhdXJlbHN0ZWluQGtub3UuYWMua3IiLCJ1cG4iOiJhdXJlbHN0ZWluQGtub3UuYWMua3IiLCJ1dGkiOiJNYklmTEx2Q04wVzhwUDNlNlNreUFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX3N0Ijp7InN1YiI6InBFLUNLQ252ckVSN28zR1lyYlJpcmx6R2MtYXB3dElkNVRlREh2WWtTb1EifSwieG1zX3RjZHQiOjE0NDM0MTI0MDB9.vjsYcr03YG6A1EpyoaZBS-ZGjx7knaScmxjb_vUBVS4rpQ6KO3uei7NKaMKKeORT4wYAYDbVAYtEPdU4fGfQif38RnOMK7SBaDeXDdF8n56DCQ7wD7KbN0A2-VWperSca_GQF28k9CGpbVz8R9fiYiTbFVh3Ulkxn9fol9dUN2Ivwzf91MAQ6AZVkXVM8RTAH1f2NeZjZo4bNtA0Tm9anYdIWzII_xg8AnNzqnc61Izomqk2Z0M1q6e7W9dA8PyxqJRtKP48EQnKNaoQexjHEhGJpf7zl1QfafNdEqFmhp3nJzWRwDfDjlzUkcdXMb2JgxiM7KPLN2BigDPySSD0yQ","token_type":"Bearer","refresh_token":"0.AVMAe1hedZjgyUubierPY2GXA9llVrGm7ZJAhTkO7Ddq_VlTAHs.AgABAAEAAAD--DLA3VO7QrddgJg7WevrAgDs_wQA9P-TxrQdrP92AS4FCCuwcLrr2fhQYrSnnb20YRIVAQ7lCLaSnj8rYjWnFXO3GA1oaYto4_FgFGjs8WjE4eHi8es5TPWwmLsDfMpJYDkRHfDhQ9XnxIlgka7LoeD43EaFPb7VEeFF5ngmYnlDHvHNxtEdnHsspaI_ZOZKVQshquyC-scR7VSlVQRt1whi_k_zWpCHM3z6HutR-5tC2-w7KYBXRaR_OLyV8o4a2OsLVd0e0Gx5hOCX8mPj01wE9SjSgpn5dqd7vzbrTSPY-l3RfAE4PdI59dsZX59n0yqBU1xV6Yi38Nod5T0qkFOPOPsMd5ryEhzT1HKC32OW4yxy7EDJkQGva2zsprIckicuMKDm_PGaegWlj7dkrs5_9gmcAD6jSHcyNADHBiNN4W3TBUtJVVWUPi-qbuGf_9tTAFbATDxkRplfTn7RvUGByBQmth6s_yy8mWlC4LHr02MZiIZQQ_pcFehM7VqfAk3PonGEIdlwztE-Llia2uGjsdReEyObjLem2u5jCKOOS0yApeD14_STKKFqdcxKwToMATVNwSvgVJUyl_wBtyttKhR4y_SVWXrmOGYQYGf_i8W3MISF7CfdDbq7HbP_lLI3jOY0wjrETagn4eA83AYrK_PhNnLn4imtfDPCH20jputccez2iqohMXZ0lciek8OJiHH0xPR2GmDnpR56K1XeztpaZtDsc4V0629ybE_krX0dRi7I7KqqsoHua-_MyB1OqHXQLpqFx9bZNcBpjS4L7yQ_piwVK4M","expiry":"2022-07-29T16:55:53.1327796+09:00"}
+<---End paste
+
+Use auto config?
+ * Say Y if not sure
+ * Say N if you are working on a remote or headless machine
+
+y) Yes (default)
+n) No
+y/n> n
+
+Option config_token.
+For this to work, you will need rclone available on a machine that has
+a web browser available.
+For more help and alternate methods see: https://rclone.org/remote_setup/
+Execute the following on the machine with the web browser (same rclone
+version recommended):
+	rclone authorize "onedrive" "eyJjbGllbnRfaWQiOiJhdXJlbHN0ZWluQGtub3UuYWMua3IiLCJjbGllbnRfc2VjcmV0IjoiZGxybWZmbjIjIn0"
+Then paste the result.
+Enter a value.
+config_token> {"access_token":"eyJ0eXAiOiJKV1QiLCJub25jZSI6InVQaTRsNjVwZDlMcE54UXdDaFo3RUUzeTZoUGkteDlQb1llZ2tIY3d4YnciLCJhbGciOiJSUzI1NiIsIng1dCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSIsImtpZCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC83NTVlNTg3Yi1lMDk4LTRiYzktOWI4OS1lYWNmNjM2MTk3MDMvIiwiaWF0IjoxNjU5MDc2NzMwLCJuYmYiOjE2NTkwNzY3MzAsImV4cCI6MTY1OTA4MTM1MiwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyWmdZTGhXNER0cHIrTFJSOTh0b21MUE40bEpXNTdVS3BqbXhsNno5Y1djaXovOWFtd0IiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6InJjbG9uZSIsImFwcGlkIjoiYjE1NjY1ZDktZWRhNi00MDkyLTg1MzktMGVlYzM3NmFmZDU5IiwiYXBwaWRhY3IiOiIxIiwiZmFtaWx5X25hbWUiOiLquYAiLCJnaXZlbl9uYW1lIjoi7IiY66-8IiwiaWR0eXAiOiJ1c2VyIiwiaXBhZGRyIjoiMTA2LjI0MS4yNTIuNTEiLCJuYW1lIjoi6rmA7IiY66-8Iiwib2lkIjoiZWI4MTcyY2MtZTNhMi00YTczLTkyZWQtZTUxZjFiMmE5Zjc1IiwicGxhdGYiOiIzIiwicHVpZCI6IjEwMDMwMDAwOUY2RkJEMTMiLCJyaCI6IjAuQVZNQWUxaGVkWmpneVV1YmllclBZMkdYQXdNQUFBQUFBQUFBd0FBQUFBQUFBQUJUQUhzLiIsInNjcCI6IkZpbGVzLlJlYWQgRmlsZXMuUmVhZC5BbGwgRmlsZXMuUmVhZFdyaXRlIEZpbGVzLlJlYWRXcml0ZS5BbGwgU2l0ZXMuUmVhZC5BbGwgcHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzdWIiOiI1N3JrTF95T1A4M2JFbjZSWmFfNVdRNm1fdHc3SmVITm5NcjFwZUZrdWprIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkFTIiwidGlkIjoiNzU1ZTU4N2ItZTA5OC00YmM5LTliODktZWFjZjYzNjE5NzAzIiwidW5pcXVlX25hbWUiOiJhdXJlbHN0ZWluQGtub3UuYWMua3IiLCJ1cG4iOiJhdXJlbHN0ZWluQGtub3UuYWMua3IiLCJ1dGkiOiJNYklmTEx2Q04wVzhwUDNlNlNreUFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX3N0Ijp7InN1YiI6InBFLUNLQ252ckVSN28zR1lyYlJpcmx6R2MtYXB3dElkNVRlREh2WWtTb1EifSwieG1zX3RjZHQiOjE0NDM0MTI0MDB9.vjsYcr03YG6A1EpyoaZBS-ZGjx7knaScmxjb_vUBVS4rpQ6KO3uei7NKaMKKeORT4wYAYDbVAYtEPdU4fGfQif38RnOMK7SBaDeXDdF8n56DCQ7wD7KbN0A2-VWperSca_GQF28k9CGpbVz8R9fiYiTbFVh3Ulkxn9fol9dUN2Ivwzf91MAQ6AZVkXVM8RTAH1f2NeZjZo4bNtA0Tm9anYdIWzII_xg8AnNzqnc61Izomqk2Z0M1q6e7W9dA8PyxqJRtKP48EQnKNaoQexjHEhGJpf7zl1QfafNdEqFmhp3nJzWRwDfDjlzUkcdXMb2JgxiM7KPLN2BigDPySSD0yQ","token_type":"Bearer","refresh_token":"0.AVMAe1hedZjgyUubierPY2GXA9llVrGm7ZJAhTkO7Ddq_VlTAHs.AgABAAEAAAD--DLA3VO7QrddgJg7WevrAgDs_wQA9P-TxrQdrP92AS4FCCuwcLrr2fhQYrSnnb20YRIVAQ7lCLaSnj8rYjWnFXO3GA1oaYto4_FgFGjs8WjE4eHi8es5TPWwmLsDfMpJYDkRHfDhQ9XnxIlgka7LoeD43EaFPb7VEeFF5ngmYnlDHvHNxtEdnHsspaI_ZOZKVQshquyC-scR7VSlVQRt1whi_k_zWpCHM3z6HutR-5tC2-w7KYBXRaR_OLyV8o4a2OsLVd0e0Gx5hOCX8mPj01wE9SjSgpn5dqd7vzbrTSPY-l3RfAE4PdI59dsZX59n0yqBU1xV6Yi38Nod5T0qkFOPOPsMd5ryEhzT1HKC32OW4yxy7EDJkQGva2zsprIckicuMKDm_PGaegWlj7dkrs5_9gmcAD6jSHcyNADHBiNN4W3TBUtJVVWUPi-qbuGf_9tTAFbATDxkRplfTn7RvUGByBQmth6s_yy8mWlC4LHr02MZiIZQQ_pcFehM7VqfAk3PonGEIdlwztE-Llia2uGjsdReEyObjLem2u5jCKOOS0yApeD14_STKKFqdcxKwToMATVNwSvgVJUyl_wBtyttKhR4y_SVWXrmOGYQYGf_i8W3MISF7CfdDbq7HbP_lLI3jOY0wjrETagn4eA83AYrK_PhNnLn4imtfDPCH20jputccez2iqohMXZ0lciek8OJiHH0xPR2GmDnpR56K1XeztpaZtDsc4V0629ybE_krX0dRi7I7KqqsoHua-_MyB1OqHXQLpqFx9bZNcBpjS4L7yQ_piwVK4M","expiry":"2022-07-29T16:55:53.1327796+09:00"}
+
+Option config_type.
+Type of connection
+Choose a number from below, or type in an existing string value.
+Press Enter for the default (onedrive).
+ 1 / OneDrive Personal or Business
+   \ (onedrive)
+ 2 / Root Sharepoint site
+   \ (sharepoint)
+   / Sharepoint site name or URL
+ 3 | E.g. mysite or https://contoso.sharepoint.com/sites/mysite
+   \ (url)
+ 4 / Search for a Sharepoint site
+   \ (search)
+ 5 / Type in driveID (advanced)
+   \ (driveid)
+ 6 / Type in SiteID (advanced)
+   \ (siteid)
+   / Sharepoint server-relative path (advanced)
+ 7 | E.g. /teams/hr
+   \ (path)
+config_type> 1
+
+Option config_driveid.
+Select drive you want to use
+Choose a number from below, or type in your own string value.
+Press Enter for the default (b!RTKZEXSQ70ureJwrt1gf8vY3hZ3XURhDj-hpvwPTN6j4yvLhzcZjTotpYfgUkTKg).
+ 1 / OneDrive (business)
+   \ (b!RTKZEXSQ70ureJwrt1gf8vY3hZ3XURhDj-hpvwPTN6j4yvLhzcZjTotpYfgUkTKg)
+config_driveid> 1
+
+Drive OK?
+
+Found drive "root" of type "business"
+URL: https://knouackr-my.sharepoint.com/personal/aurelstein_knou_ac_kr/Documents
+
+y) Yes (default)
+n) No
+y/n> y
+
+
+!rm -rf '/content/onedrive' && rm 'nohup.out'
+!sudo mkdir /content/onedrive
+!nohup rclone --vfs-cache-mode full mount onedrive: /content/onedrive &
+
+!sudo mkdir /content/onedrive
+!nohup rclone --vfs-cache-mode writes mount onedrive: /content/onedrive &
