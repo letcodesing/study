@@ -45,6 +45,7 @@ model.fit(x_train, y_train)
 #           validation_split=0.2,
 #           callbacks=ES)
 
+
 #4.평가 예측
 # loss = model.evaluate(x_test, y_test)
 

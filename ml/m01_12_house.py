@@ -338,7 +338,10 @@ print("RMSE : ", rmse)
 r2 = r2_score(y_test, y_predict)
 print('r2스코어 : ', r2)
 print(model.score(x_test,y_test))
-
+# linearsvr
+# RMSE :  36948.18468725045
+# r2스코어 :  0.7097407032003031
+# 0.7097407032003031
 # y_summit = model.predict(test_set)
 
 # print(y_summit)

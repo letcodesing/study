@@ -62,7 +62,6 @@ from sklearn.metrics import r2_score
 r2= r2_score(y_test, y_predict)
 print('r2', r2)
 print('score',model.score(x_test,y_test))
-print(regressor.support_vectors_)
 # print('loss', loss)
 
 #그리기
